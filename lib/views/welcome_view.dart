@@ -1,3 +1,4 @@
+import 'package:check_mate/widgets/welcome_body.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeView extends StatelessWidget {
@@ -7,6 +8,7 @@ class WelcomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.black,
+      body: WelcomeBody(),
     );
   }
 }
