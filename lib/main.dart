@@ -1,3 +1,4 @@
+import 'package:check_mate/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'views/welcome_view.dart';
@@ -11,9 +12,14 @@ class CheckMate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomeView(),
+      home: const WelcomeView(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: kBackgroundColor,
+        primaryColor: kPrimaryColor,
+        fontFamily: 'Inter',
+      ),
     );
   }
 }
