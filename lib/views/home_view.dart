@@ -11,23 +11,26 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const AppBarTitle(),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              size: 29,
-              Icons.search,
-              color: kPrimaryColor,
-            ),
+      appBar: buildAppBar(),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: const AppBarTitle(),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            size: 29,
+            Icons.search,
+            color: kPrimaryColor,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
-
