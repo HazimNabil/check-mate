@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
           const SizedBox(height: 20),
           const CustomTextField(hint: 'Password'),
           const SizedBox(height: 50),
-          const AuthButton(),
+          const AuthButton(title: 'Login'),
           const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -43,9 +43,10 @@ class LoginView extends StatelessWidget {
                   Navigator.pushNamed(context, RegisterView.route);
                 },
                 child: const Text(
-                  'Register',
+                  'Register here',
                   style: TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
