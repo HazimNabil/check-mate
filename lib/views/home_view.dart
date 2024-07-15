@@ -2,6 +2,7 @@ import 'package:check_mate/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_bar_title.dart';
+import '../widgets/home_body.dart';
 
 class HomeView extends StatelessWidget {
   static String route = 'home_view';
@@ -12,6 +13,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
+      body: const HomeBody(),
     );
   }
 
