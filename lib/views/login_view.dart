@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/auth_button.dart';
 import '../widgets/custom_text_field.dart';
 
 class LoginView extends StatelessWidget {
@@ -16,7 +17,6 @@ class LoginView extends StatelessWidget {
           Text(
             'Login',
             style: TextStyle(
-              // color: kBackgroundColor,
               fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
@@ -24,7 +24,9 @@ class LoginView extends StatelessWidget {
           SizedBox(height: 150),
           CustomTextField(hint: 'Email'),
           SizedBox(height: 20),
-          CustomTextField(hint: 'Password')
+          CustomTextField(hint: 'Password'),
+          SizedBox(height: 50),
+          AuthButton()
         ],
       ),
     );
