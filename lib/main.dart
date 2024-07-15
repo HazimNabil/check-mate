@@ -1,5 +1,6 @@
 import 'package:check_mate/constants.dart';
 import 'package:check_mate/views/home_view.dart';
+import 'package:check_mate/views/login_view.dart';
 import 'package:flutter/material.dart';
 
 import 'views/welcome_view.dart';
@@ -23,6 +24,7 @@ class CheckMate extends StatelessWidget {
       ),
       routes: {
         HomeView.route: (context) => const HomeView(),
+        LoginView.route: (context) => const LoginView(),
       },
     );
   }

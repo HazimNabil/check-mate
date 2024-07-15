@@ -1,5 +1,5 @@
 import 'package:check_mate/constants.dart';
-import 'package:check_mate/views/home_view.dart';
+import 'package:check_mate/views/login_view.dart';
 import 'package:flutter/material.dart';
 
 import 'app_logo.dart';
@@ -35,7 +35,7 @@ class WelcomeBody extends StatelessWidget {
           const SizedBox(height: 193.5),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, HomeView.route);
+              Navigator.pushNamed(context, LoginView.route);
             },
             style: const ButtonStyle(
               fixedSize: WidgetStatePropertyAll(Size(220, 53)),
