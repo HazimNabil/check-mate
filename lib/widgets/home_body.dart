@@ -2,7 +2,8 @@ import 'package:check_mate/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'new_list_button.dart';
+import 'all_lists_widget.dart';
+import 'pinned_lists_widget.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
@@ -36,6 +37,14 @@ class _HomeBodyState extends State<HomeBody> {
     ),
   };
 
+  Widget buildSegmentContent(int selectedSegment) {
+    if (_selectedSegment == 0) {
+      return const AllListWidget();
+    } else {
+      return const PinnedListWidget();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,20 +64,8 @@ class _HomeBodyState extends State<HomeBody> {
             unselectedColor: const Color(0xFFE5E5E5),
           ),
         ),
-        const SizedBox(height: 100),
-        Image.asset('assets/images/todo svg.png'),
-        const SizedBox(height: 89),
-        const Text(
-          'Create your first to-do list...',
-          style: TextStyle(
-            fontSize: 23,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 48),
-        const NewListButton()
+        buildSegmentContent(_selectedSegment),
       ],
     );
   }
 }
-
