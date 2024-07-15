@@ -1,3 +1,4 @@
+import 'package:check_mate/views/register_view.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/auth_button.dart';
@@ -10,37 +11,42 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Login',
             style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 130),
-          CustomTextField(hint: 'Email'),
-          SizedBox(height: 20),
-          CustomTextField(hint: 'Password'),
-          SizedBox(height: 50),
-          AuthButton(),
-          SizedBox(height: 15),
+          const SizedBox(height: 130),
+          const CustomTextField(hint: 'Email'),
+          const SizedBox(height: 20),
+          const CustomTextField(hint: 'Password'),
+          const SizedBox(height: 50),
+          const AuthButton(),
+          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Don't have account? ",
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-              Text(
-                'Register',
-                style: TextStyle(
-                  fontSize: 16,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, RegisterView.route);
+                },
+                child: const Text(
+                  'Register',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ],
