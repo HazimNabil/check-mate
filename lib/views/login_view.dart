@@ -17,16 +17,34 @@ class LoginView extends StatelessWidget {
           Text(
             'Login',
             style: TextStyle(
-              fontSize: 32,
+              fontSize: 40,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 150),
+          SizedBox(height: 130),
           CustomTextField(hint: 'Email'),
           SizedBox(height: 20),
           CustomTextField(hint: 'Password'),
           SizedBox(height: 50),
-          AuthButton()
+          AuthButton(),
+          SizedBox(height: 15),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Don't have account? ",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                'Register',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
