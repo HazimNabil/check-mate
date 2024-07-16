@@ -4,13 +4,14 @@ import '../constants.dart';
 
 class AuthButton extends StatelessWidget {
   final String title;
+  final VoidCallback onPressed;
 
-  const AuthButton({super.key, required this.title});
+  const AuthButton({super.key, required this.title, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         elevation: 0,
         fixedSize: const Size(170, 45),

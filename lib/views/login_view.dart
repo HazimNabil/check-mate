@@ -23,11 +23,20 @@ class LoginView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 130),
-          const CustomTextField(hint: 'Email'),
+          CustomTextField(
+            hint: 'Email',
+            onChanged: (value) {},
+          ),
           const SizedBox(height: 20),
-          const CustomTextField(hint: 'Password'),
+          CustomTextField(
+            hint: 'Password',
+            onChanged: (value) {},
+          ),
           const SizedBox(height: 50),
-          const AuthButton(title: 'Login'),
+          AuthButton(
+            title: 'Login',
+            onPressed: () {},
+          ),
           const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
