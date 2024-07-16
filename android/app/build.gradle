@@ -59,3 +59,16 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Exclude conflicting Kotlin stdlib versions
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == 'org.jetbrains.kotlin' && details.requested.name.contains('stdlib')) {
+                details.useVersion '1.8.22'
+            }
+        }
+    }
+}
