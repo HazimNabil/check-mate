@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextField(
+        cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           filled: true,
           fillColor: const Color(0xFFE3E2E2),
