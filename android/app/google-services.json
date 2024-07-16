@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "724000976607",
+    "project_id": "check-mate-914ad",
+    "storage_bucket": "check-mate-914ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724000976607:android:014be33cd1989d5905c36a",
+        "android_client_info": {
+          "package_name": "com.example.check_mate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdJv30zGgTk4Kk0aJoWTXFzSwgxW1cNl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
