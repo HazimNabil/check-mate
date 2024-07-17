@@ -1,4 +1,5 @@
 import 'package:check_mate/constants.dart';
+import 'package:check_mate/views/home_view.dart';
 import 'package:check_mate/views/register_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,38 @@ class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
   bool isLoading = false;
   var autovalidateMode = AutovalidateMode.disabled;
+
+  void login() async {
+    if (formKey.currentState!.validate()) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      setState(() => isLoading = true);
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email!,
+          password: password!,
+        );
+        showSnackBar(
+          context,
+          'Login successful! Welcome back!',
+        );
+        Navigator.pushReplacementNamed(context, HomeView.route);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'invalid-credential') {
+          showSnackBar(
+            context,
+            'Invalid credentials. Please double-check your email and password, and try again',
+          );
+        } else {
+          showSnackBar(context, e.code);
+        }
+      } catch (e) {
+        showSnackBar(context, e.toString());
+      }
+      setState(() => isLoading = false);
+    } else {
+      setState(() => autovalidateMode = AutovalidateMode.always);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,32 +112,7 @@ class _LoginViewState extends State<LoginView> {
               const SizedBox(height: 50),
               AuthButton(
                 title: 'Login',
-                onPressed: () async {
-                  if (formKey.currentState!.validate()) {
-                    setState(() => isLoading = true);
-                    try {
-                      await login();
-                      showSnackBar(
-                        context,
-                        'Login successful! Welcome back!',
-                      );
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'invalid-credential') {
-                        showSnackBar(
-                          context,
-                          'Invalid credentials. Please double-check your email and password, and try again',
-                        );
-                      } else {
-                        showSnackBar(context, e.code);
-                      }
-                    } catch (e) {
-                      showSnackBar(context, e.toString());
-                    }
-                    setState(() => isLoading = false);
-                  } else {
-                    setState(() => autovalidateMode = AutovalidateMode.always);
-                  }
-                },
+                onPressed: login,
               ),
               const SizedBox(height: 15),
               Row(
@@ -134,13 +142,6 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> login() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email!,
-      password: password!,
     );
   }
 }

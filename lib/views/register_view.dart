@@ -1,3 +1,4 @@
+import 'package:check_mate/views/home_view.dart';
 import 'package:check_mate/views/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,41 @@ class _RegisterViewState extends State<RegisterView> {
   final formKey = GlobalKey<FormState>();
   bool isLoading = false;
   var autovalidateMode = AutovalidateMode.disabled;
+
+  void register() async {
+    if (formKey.currentState!.validate()) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      setState(() => isLoading = true);
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email!,
+          password: password!,
+        );
+        showSnackBar(
+          context,
+          'The registration is done successfully',
+        );
+        Navigator.pushReplacementNamed(context, HomeView.route);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          showSnackBar(
+            context,
+            'The provided password is too weak',
+          );
+        } else if (e.code == 'email-already-in-use') {
+          showSnackBar(
+            context,
+            'The provided email is already used',
+          );
+        }
+      } catch (e) {
+        showSnackBar(context, e.toString());
+      }
+      setState(() => isLoading = false);
+    } else {
+      setState(() => autovalidateMode = AutovalidateMode.always);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,35 +131,7 @@ class _RegisterViewState extends State<RegisterView> {
               const SizedBox(height: 50),
               AuthButton(
                 title: 'Register',
-                onPressed: () async {
-                  if (formKey.currentState!.validate()) {
-                    setState(() => isLoading = true);
-                    try {
-                      await register();
-                      showSnackBar(
-                        context,
-                        'The registration is done successfully',
-                      );
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'weak-password') {
-                        showSnackBar(
-                          context,
-                          'The provided password is too weak',
-                        );
-                      } else if (e.code == 'email-already-in-use') {
-                        showSnackBar(
-                          context,
-                          'The provided email is already used',
-                        );
-                      }
-                    } catch (e) {
-                      showSnackBar(context, e.toString());
-                    }
-                    setState(() => isLoading = false);
-                  } else {
-                    setState(() => autovalidateMode = AutovalidateMode.always);
-                  }
-                },
+                onPressed: register,
               ),
               const SizedBox(height: 15),
               Row(
@@ -153,13 +161,6 @@ class _RegisterViewState extends State<RegisterView> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> register() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email!,
-      password: password!,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:check_mate/constants.dart';
+import 'package:check_mate/views/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,11 +11,7 @@ class HomeView extends StatelessWidget {
 
   const HomeView({super.key});
 
-  void logout() {
-    FirebaseAuth.instance.signOut();
-  }
-
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
@@ -30,7 +27,10 @@ class HomeView extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: logout,
+          onPressed: () {
+            FirebaseAuth.instance.signOut();
+            Navigator.pushNamed(context, LoginView.route);
+          },
           icon: const Icon(
             size: 29,
             Icons.logout,
@@ -44,7 +44,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: const HomeBody(),
     );
   }
