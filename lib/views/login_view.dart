@@ -83,10 +83,7 @@ class _LoginViewState extends State<LoginView> {
                   if (formKey.currentState!.validate()) {
                     setState(() => isLoading = true);
                     try {
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: email!,
-                        password: password!,
-                      );
+                      await login();
                       showSnackBar(
                         context,
                         'Login successful! Welcome back!',
@@ -137,6 +134,13 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> login() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email!,
+      password: password!,
     );
   }
 }
