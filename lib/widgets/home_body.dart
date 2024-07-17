@@ -47,25 +47,27 @@ class _HomeBodyState extends State<HomeBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 20),
-        SizedBox(
-          width: 340,
-          child: CupertinoSegmentedControl<int>(
-            children: children,
-            onValueChanged: (int value) {
-              setState(() => _selectedSegment = value);
-            },
-            groupValue: _selectedSegment,
-            selectedColor: kPrimaryColor,
-            pressedColor: const Color(0xFFE5E5E5),
-            borderColor: Colors.transparent,
-            unselectedColor: const Color(0xFFE5E5E5),
+    return Center(
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          SizedBox(
+            width: 340,
+            child: CupertinoSegmentedControl<int>(
+              children: children,
+              onValueChanged: (int value) {
+                setState(() => _selectedSegment = value);
+              },
+              groupValue: _selectedSegment,
+              selectedColor: kPrimaryColor,
+              pressedColor: const Color(0xFFE5E5E5),
+              borderColor: Colors.transparent,
+              unselectedColor: const Color(0xFFE5E5E5),
+            ),
           ),
-        ),
-        buildSegmentContent(_selectedSegment),
-      ],
+          buildSegmentContent(_selectedSegment),
+        ],
+      ),
     );
   }
 }
