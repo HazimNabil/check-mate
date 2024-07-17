@@ -1,3 +1,4 @@
+import 'package:check_mate/views/to_do_list_view.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -14,7 +15,9 @@ class NewListButton extends StatelessWidget {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, ToDoListView.route);
+      },
       label: const Text(
         'New List',
         style: TextStyle(
