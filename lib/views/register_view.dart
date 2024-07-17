@@ -35,7 +35,7 @@ class _RegisterViewState extends State<RegisterView> {
         );
         showSnackBar(
           context,
-          'The registration is done successfully',
+          'Registration completed successfully! Welcome aboard!',
         );
         Navigator.pushReplacementNamed(context, HomeView.route);
       } on FirebaseAuthException catch (e) {
