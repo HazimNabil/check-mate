@@ -1,5 +1,6 @@
 import 'package:check_mate/constants.dart';
 import 'package:check_mate/firebase_options.dart';
+import 'package:check_mate/views/auth_view.dart';
 import 'package:check_mate/views/home_view.dart';
 import 'package:check_mate/views/login_view.dart';
 import 'package:check_mate/views/register_view.dart';
@@ -33,6 +34,7 @@ class CheckMate extends StatelessWidget {
         HomeView.route: (context) => const HomeView(),
         LoginView.route: (context) => const LoginView(),
         RegisterView.route: (context) => const RegisterView(),
+        AuthView.route: (context) => const AuthView(),
       },
     );
   }
