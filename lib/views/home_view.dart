@@ -1,4 +1,5 @@
 import 'package:check_mate/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_bar_title.dart';
@@ -9,12 +10,8 @@ class HomeView extends StatelessWidget {
 
   const HomeView({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(),
-      body: const HomeBody(),
-    );
+  void logout() {
+    FirebaseAuth.instance.signOut();
   }
 
   AppBar buildAppBar() {
@@ -32,7 +29,23 @@ class HomeView extends StatelessWidget {
             color: kPrimaryColor,
           ),
         ),
+        IconButton(
+          onPressed: logout,
+          icon: const Icon(
+            size: 29,
+            Icons.logout,
+            color: kPrimaryColor,
+          ),
+        ),
       ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildAppBar(),
+      body: const HomeBody(),
     );
   }
 }
