@@ -35,7 +35,7 @@ class WelcomeBody extends StatelessWidget {
           const SizedBox(height: 193.5),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, AuthView.route);
+              Navigator.pushReplacementNamed(context, AuthView.route);
             },
             style: const ButtonStyle(
               fixedSize: WidgetStatePropertyAll(Size(220, 53)),
