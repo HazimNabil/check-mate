@@ -2,6 +2,8 @@ import 'package:check_mate/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../widgets/to_do_list_body.dart';
+
 class ToDoListView extends StatelessWidget {
   static String route = 'to_do_list_view';
 
@@ -41,6 +43,7 @@ class ToDoListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
+      body: const ToDoListBody(),
     );
   }
 }
