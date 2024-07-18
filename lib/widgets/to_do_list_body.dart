@@ -12,6 +12,11 @@ class ToDoListBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ToDoListSection(),
+        Divider(
+          indent: 16,
+          endIndent: 16,
+          height: 35,
+        ),
         LabelSection(),
       ],
     );
