@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class LabelItem extends StatelessWidget {
   final String label;
+  final Color color;
 
-  const LabelItem({super.key, required this.label});
+  const LabelItem({super.key, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class LabelItem extends StatelessWidget {
       margin: const EdgeInsets.only(right: 16),
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFF898989),
+        color: color,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
