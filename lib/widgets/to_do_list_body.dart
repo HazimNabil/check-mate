@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'task_list.dart';
 import 'to_do_text_field.dart';
 
 class ToDoListBody extends StatelessWidget {
@@ -13,8 +14,9 @@ class ToDoListBody extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: ToDoTextField(),
-              )
+                child: ToDoTextField(fontSize: 26, hint: 'Title'),
+              ),
+              TaskList()
             ],
           ),
         )
