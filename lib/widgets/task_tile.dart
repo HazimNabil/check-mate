@@ -10,6 +10,7 @@ class TaskTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      minVerticalPadding: 4,
       horizontalTitleGap: 0,
       leading: Icon(icon),
       title: const ToDoTextField(
