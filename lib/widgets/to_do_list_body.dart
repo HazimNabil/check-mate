@@ -1,3 +1,4 @@
+import 'package:check_mate/widgets/task_tile.dart';
 import 'package:flutter/material.dart';
 
 import 'task_list.dart';
@@ -16,7 +17,10 @@ class ToDoListBody extends StatelessWidget {
               SliverToBoxAdapter(
                 child: ToDoTextField(fontSize: 26, hint: 'Title'),
               ),
-              TaskList()
+              TaskList(),
+              SliverToBoxAdapter(
+                child: TaskTile(icon: Icons.add_box_outlined),
+              ),
             ],
           ),
         )

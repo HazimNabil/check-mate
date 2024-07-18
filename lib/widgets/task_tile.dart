@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'to_do_text_field.dart';
 
 class TaskTile extends StatelessWidget {
-  const TaskTile({super.key});
+  final IconData icon;
+
+  const TaskTile({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
-    return const ListTile(
+    return ListTile(
       horizontalTitleGap: 0,
-      leading: Icon(Icons.check_box_outline_blank),
-      title: ToDoTextField(
+      leading: Icon(icon),
+      title: const ToDoTextField(
         fontSize: 18,
         hint: 'To-do',
       ),

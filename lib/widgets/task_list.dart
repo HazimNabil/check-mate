@@ -11,7 +11,9 @@ class TaskList extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         childCount: 3,
         (context, index) {
-          return const TaskTile();
+          return const TaskTile(
+            icon: Icons.check_box_outline_blank,
+          );
         },
       ),
     );
