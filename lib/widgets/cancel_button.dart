@@ -6,7 +6,14 @@ class CancelButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pop(context),
+      onTap: () async {
+        bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
+        if (isKeyboardVisible) {
+          FocusScope.of(context).unfocus();
+          await Future.delayed(const Duration(milliseconds: 520));
+        }
+        Navigator.pop(context);
+      },
       child: const Padding(
         padding: EdgeInsets.only(right: 16),
         child: Text(
