@@ -1,16 +1,28 @@
 import 'package:check_mate/views/login_view.dart';
+import 'package:check_mate/widgets/all_lists_widget.dart';
+import 'package:check_mate/widgets/pinned_lists_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../constants.dart';
-import '../widgets/home_body.dart';
 import '../widgets/logo_drawer_header.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   static String route = 'home_view';
 
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  int currentIndex = 0;
+  final bodies = const [
+    AllListWidget(),
+    PinnedListWidget(),
+  ];
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -34,7 +46,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: const HomeBody(),
+      body: bodies[currentIndex],
       endDrawer: Drawer(
         backgroundColor: kBackgroundColor,
         child: ListView(
@@ -44,13 +56,19 @@ class HomeView extends StatelessWidget {
             DrawerTile(
               title: 'All Lists',
               icon: FontAwesomeIcons.list,
-              onTap: () {},
+              onTap: () => setState(() {
+                currentIndex = 0;
+                Navigator.pop(context);
+              }),
             ),
             const SizedBox(height: 40),
             DrawerTile(
               title: 'Pinned Lists',
               icon: FontAwesomeIcons.thumbtack,
-              onTap: () {},
+              onTap: () => setState(() {
+                currentIndex = 1;
+                Navigator.pop(context);
+              }),
             ),
             const SizedBox(height: 40),
             DrawerTile(
@@ -64,6 +82,7 @@ class HomeView extends StatelessWidget {
               icon: FontAwesomeIcons.arrowRightFromBracket,
               onTap: () {
                 FirebaseAuth.instance.signOut();
+                Navigator.pop(context);
                 Navigator.pushReplacementNamed(context, LoginView.route);
               },
             ),
