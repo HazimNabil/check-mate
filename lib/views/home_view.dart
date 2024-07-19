@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../constants.dart';
 import '../widgets/home_body.dart';
@@ -35,9 +36,66 @@ class HomeView extends StatelessWidget {
       endDrawer: Drawer(
         backgroundColor: kBackgroundColor,
         child: ListView(
-          children: const [
-            LogoDrawerHeader(),
+          children: [
+            const LogoDrawerHeader(),
+            const SizedBox(height: 60),
+            DrawerTile(
+              title: 'All Lists',
+              icon: FontAwesomeIcons.list,
+              onTap: () {},
+            ),
+            const SizedBox(height: 40),
+            DrawerTile(
+              title: 'Pinned Lists',
+              icon: FontAwesomeIcons.thumbtack,
+              onTap: () {},
+            ),
+            const SizedBox(height: 40),
+            DrawerTile(
+              title: 'Search',
+              icon: FontAwesomeIcons.magnifyingGlass,
+              onTap: () {},
+            ),
+            const SizedBox(height: 190),
+            DrawerTile(
+              title: 'Logout',
+              icon: FontAwesomeIcons.arrowRightFromBracket,
+              onTap: () {},
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class DrawerTile extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap;
+
+  const DrawerTile({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.only(left: 32),
+      horizontalTitleGap: 30,
+      onTap: onTap,
+      leading: Icon(
+        icon,
+        color: kPrimaryColor,
+      ),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
