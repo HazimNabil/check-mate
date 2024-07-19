@@ -2,8 +2,6 @@ import 'package:check_mate/constants.dart';
 import 'package:check_mate/views/auth_view.dart';
 import 'package:flutter/material.dart';
 
-import 'app_logo.dart';
-
 class WelcomeBody extends StatelessWidget {
   const WelcomeBody({super.key});
 
@@ -14,7 +12,7 @@ class WelcomeBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 294),
-          const AppLogo(),
+          Image.asset('assets/images/dark app logo.png'),
           const SizedBox(height: 32),
           const Text(
             kAppName,

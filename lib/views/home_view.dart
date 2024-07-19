@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/app_bar_title.dart';
+import '../constants.dart';
 import '../widgets/home_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -13,7 +13,16 @@ class HomeView extends StatelessWidget {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: const AppBarTitle(),
+      leading: Image.asset('assets/images/light app logo.png'),
+      titleSpacing: 0,
+      title: const Text(
+        kAppName,
+        style: TextStyle(
+          fontFamily: 'Inter-ExtraBold',
+          fontWeight: FontWeight.w800,
+          fontSize: 26,
+        ),
+      ),
     );
   }
 
