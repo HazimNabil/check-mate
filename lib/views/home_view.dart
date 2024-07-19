@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
         IconButton(
           onPressed: () {
             FirebaseAuth.instance.signOut();
-            Navigator.pushNamed(context, LoginView.route);
+            Navigator.pushReplacementNamed(context, LoginView.route);
           },
           icon: const Icon(
             size: 29,
