@@ -1,3 +1,5 @@
+import 'package:check_mate/views/login_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -60,7 +62,10 @@ class HomeView extends StatelessWidget {
             DrawerTile(
               title: 'Logout',
               icon: FontAwesomeIcons.arrowRightFromBracket,
-              onTap: () {},
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacementNamed(context, LoginView.route);
+              },
             ),
           ],
         ),
