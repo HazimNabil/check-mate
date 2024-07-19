@@ -26,6 +26,24 @@ class _HomeViewState extends State<HomeView> {
     PinnedListWidget(),
   ];
 
+  void logout() {
+    FirebaseAuth.instance.signOut();
+    Navigator.pop(context);
+    Navigator.pushReplacementNamed(context, LoginView.route);
+  }
+
+  void selectBody(int index) {
+    setState(() {
+      currentIndex = index;
+      Navigator.pop(context);
+    });
+  }
+
+  void toSearchView() {
+    Navigator.pop(context);
+    Navigator.pushNamed(context, SearchView.route);
+  }
+
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
@@ -58,38 +76,25 @@ class _HomeViewState extends State<HomeView> {
             DrawerTile(
               title: 'All Lists',
               icon: FontAwesomeIcons.list,
-              onTap: () => setState(() {
-                currentIndex = 0;
-                Navigator.pop(context);
-              }),
+              onTap: () => selectBody(0),
             ),
             const SizedBox(height: 40),
             DrawerTile(
               title: 'Pinned Lists',
               icon: FontAwesomeIcons.thumbtack,
-              onTap: () => setState(() {
-                currentIndex = 1;
-                Navigator.pop(context);
-              }),
+              onTap: () => selectBody(1),
             ),
             const SizedBox(height: 40),
             DrawerTile(
               title: 'Search',
               icon: FontAwesomeIcons.magnifyingGlass,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, SearchView.route);
-              },
+              onTap: toSearchView,
             ),
             const SizedBox(height: 190),
             DrawerTile(
               title: 'Logout',
               icon: FontAwesomeIcons.arrowRightFromBracket,
-              onTap: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.pop(context);
-                Navigator.pushReplacementNamed(context, LoginView.route);
-              },
+              onTap: logout,
             ),
           ],
         ),
