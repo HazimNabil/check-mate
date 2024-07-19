@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../constants.dart';
+import '../widgets/drawer_tile.dart';
 import '../widgets/logo_drawer_header.dart';
 
 class HomeView extends StatefulWidget {
@@ -93,35 +94,3 @@ class _HomeViewState extends State<HomeView> {
   }
 }
 
-class DrawerTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback onTap;
-
-  const DrawerTile({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.only(left: 32),
-      horizontalTitleGap: 30,
-      onTap: onTap,
-      leading: Icon(
-        icon,
-        color: kPrimaryColor,
-      ),
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 26,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-}
