@@ -1,5 +1,6 @@
 import 'package:check_mate/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../widgets/cancel_button.dart';
 
@@ -19,6 +20,10 @@ class SearchView extends StatelessWidget {
         title: CustomTextField(
           hint: 'Search your list',
           onChanged: (value) {},
+          icon: const Icon(
+            FontAwesomeIcons.magnifyingGlass,
+            size: 18,
+          ),
         ),
         actions: const [
           CancelButton(),
@@ -27,4 +32,3 @@ class SearchView extends StatelessWidget {
     );
   }
 }
-

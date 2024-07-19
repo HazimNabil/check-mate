@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final void Function(String) onChanged;
   final String? Function(String?)? validator;
   final bool obscureText;
+  final Icon? icon;
 
   const CustomTextField({
     super.key,
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     required this.onChanged,
     this.validator,
     this.obscureText = false,
+    this.icon,
   });
 
   @override
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
+          prefixIcon: icon,
           filled: true,
           fillColor: const Color(0xFFE3E2E2),
           hintText: hint,
