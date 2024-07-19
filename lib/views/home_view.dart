@@ -1,6 +1,3 @@
-import 'package:check_mate/constants.dart';
-import 'package:check_mate/views/login_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_bar_title.dart';
@@ -17,27 +14,6 @@ class HomeView extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: const AppBarTitle(),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            size: 29,
-            Icons.search,
-            color: kPrimaryColor,
-          ),
-        ),
-        IconButton(
-          onPressed: () {
-            FirebaseAuth.instance.signOut();
-            Navigator.pushReplacementNamed(context, LoginView.route);
-          },
-          icon: const Icon(
-            size: 29,
-            Icons.logout,
-            color: kPrimaryColor,
-          ),
-        ),
-      ],
     );
   }
 
