@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import '../widgets/home_body.dart';
+import '../widgets/logo_drawer_header.dart';
 
 class HomeView extends StatelessWidget {
   static String route = 'home_view';
@@ -31,8 +32,13 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(context),
       body: const HomeBody(),
-      endDrawer: const Drawer(
+      endDrawer: Drawer(
         backgroundColor: kBackgroundColor,
+        child: ListView(
+          children: const [
+            LogoDrawerHeader(),
+          ],
+        ),
       ),
     );
   }
