@@ -4,6 +4,7 @@ import 'package:check_mate/views/auth_view.dart';
 import 'package:check_mate/views/home_view.dart';
 import 'package:check_mate/views/login_view.dart';
 import 'package:check_mate/views/register_view.dart';
+import 'package:check_mate/views/search_view.dart';
 import 'package:check_mate/views/to_do_list_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class CheckMate extends StatelessWidget {
         RegisterView.route: (context) => const RegisterView(),
         AuthView.route: (context) => const AuthView(),
         ToDoListView.route: (context) => const ToDoListView(),
+        SearchView.route: (context) => const SearchView(),
       },
     );
   }

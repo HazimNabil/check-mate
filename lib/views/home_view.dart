@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants.dart';
 import '../widgets/drawer_tile.dart';
 import '../widgets/logo_drawer_header.dart';
+import 'search_view.dart';
 
 class HomeView extends StatefulWidget {
   static String route = 'home_view';
@@ -75,7 +76,10 @@ class _HomeViewState extends State<HomeView> {
             DrawerTile(
               title: 'Search',
               icon: FontAwesomeIcons.magnifyingGlass,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, SearchView.route);
+              },
             ),
             const SizedBox(height: 190),
             DrawerTile(
@@ -93,4 +97,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-
