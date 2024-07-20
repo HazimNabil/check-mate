@@ -48,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.transparent,
+      backgroundColor: kBackgroundColor,
       elevation: 0,
       leading: Image.asset('assets/images/light app logo.png'),
       titleSpacing: 0,
