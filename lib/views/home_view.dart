@@ -1,4 +1,5 @@
 import 'package:check_mate/views/login_view.dart';
+import 'package:check_mate/views/to_do_list_view.dart';
 import 'package:check_mate/widgets/active_lists_body.dart';
 import 'package:check_mate/widgets/all_lists_widget.dart';
 import 'package:check_mate/widgets/pinned_lists_widget.dart';
@@ -101,7 +102,9 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, ToDoListView.route);
+        },
         backgroundColor: kPrimaryColor,
         shape: const CircleBorder(),
         child: const Icon(
