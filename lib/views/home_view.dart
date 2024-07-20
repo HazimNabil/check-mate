@@ -1,5 +1,4 @@
 import 'package:check_mate/views/login_view.dart';
-import 'package:check_mate/views/to_do_list_view.dart';
 import 'package:check_mate/widgets/active_lists_body.dart';
 import 'package:check_mate/widgets/all_lists_widget.dart';
 import 'package:check_mate/widgets/pinned_lists_widget.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../constants.dart';
+import '../widgets/add_list_fab.dart';
 import '../widgets/drawer_tile.dart';
 import '../widgets/logo_drawer_header.dart';
 import 'search_view.dart';
@@ -101,18 +101,7 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, ToDoListView.route);
-        },
-        backgroundColor: kPrimaryColor,
-        shape: const CircleBorder(),
-        child: const Icon(
-          FontAwesomeIcons.plus,
-          color: kBackgroundColor,
-          size: 18,
-        ),
-      ),
+      floatingActionButton: const AddListFab(),
     );
   }
 }
