@@ -28,7 +28,7 @@ class _LabelListState extends State<LabelList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 34,
+      height: 29,
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         scrollDirection: Axis.horizontal,
