@@ -17,9 +17,16 @@ class ListSubTitle extends StatelessWidget {
         SizedBox(width: 10),
         Row(
           children: [
-            Icon(Icons.calendar_today),
+            Icon(
+              Icons.calendar_today_outlined,
+              color: kPrimaryColor,
+              size: 20,
+            ),
             SizedBox(width: 10),
-            Text('09-01-2003'),
+            Text(
+              '09-01-2003',
+              style: TextStyle(color: kPrimaryColor, fontSize: 17),
+            ),
           ],
         )
       ],
