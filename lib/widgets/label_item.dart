@@ -11,7 +11,7 @@ class LabelItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 16),
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 14),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(6),
@@ -20,7 +20,7 @@ class LabelItem extends StatelessWidget {
         label,
         style: const TextStyle(
           color: kBackgroundColor,
-          fontSize: 16,
+          fontSize: 15,
         ),
       ),
     );
