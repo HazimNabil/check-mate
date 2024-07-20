@@ -100,6 +100,16 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: kPrimaryColor,
+        shape: const CircleBorder(),
+        child: const Icon(
+          FontAwesomeIcons.plus,
+          color: kBackgroundColor,
+          size: 18,
+        ),
+      ),
     );
   }
 }
