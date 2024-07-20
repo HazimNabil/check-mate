@@ -1,4 +1,5 @@
 import 'package:check_mate/views/login_view.dart';
+import 'package:check_mate/widgets/active_lists_body.dart';
 import 'package:check_mate/widgets/all_lists_widget.dart';
 import 'package:check_mate/widgets/pinned_lists_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -66,7 +67,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: bodies[currentIndex],
+      body: const ActiveListsBody(),
       endDrawer: Drawer(
         backgroundColor: kBackgroundColor,
         child: ListView(
