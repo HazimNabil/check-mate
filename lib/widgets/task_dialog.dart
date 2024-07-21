@@ -1,3 +1,4 @@
+import 'package:check_mate/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -7,12 +8,16 @@ class TaskDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AlertDialog(
+    return AlertDialog(
       backgroundColor: kBackgroundColor,
-      title: Text('Add new task'),
-      contentPadding: EdgeInsets.symmetric(
+      title: const Text('Add new task'),
+      contentPadding: const EdgeInsets.symmetric(
         vertical: 16,
         horizontal: 2,
+      ),
+      content: CustomTextField(
+        hint: 'Task title',
+        onChanged: (value) {},
       ),
     );
   }
