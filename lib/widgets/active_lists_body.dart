@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'to_do_list_tile.dart';
+import 'task_tile.dart';
 
 class ActiveListsBody extends StatelessWidget {
   const ActiveListsBody({super.key});
@@ -11,7 +11,7 @@ class ActiveListsBody extends StatelessWidget {
       padding: const EdgeInsets.only(top: 16.0),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          return const ToDoListTile();
+          return const TaskTile();
         },
       ),
     );

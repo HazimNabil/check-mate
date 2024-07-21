@@ -2,8 +2,8 @@ import 'package:check_mate/constants.dart';
 import 'package:check_mate/widgets/label_item.dart';
 import 'package:flutter/material.dart';
 
-class ToDoListTile extends StatelessWidget {
-  const ToDoListTile({super.key});
+class TaskTile extends StatelessWidget {
+  const TaskTile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +21,19 @@ class ToDoListTile extends StatelessWidget {
           onPressed: () {},
         ),
         title: const Padding(
-          padding: EdgeInsets.only(right: 6.0),
+          padding: EdgeInsets.only(right: 8.0),
           child: Text(
             "Write code",
             style: TextStyle(
-              fontSize: 17,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        trailing: const LabelItem(label: 'Finance', color: kPrimaryColor),
+        trailing: const LabelItem(
+          label: 'Finance',
+          color: kPrimaryColor,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
