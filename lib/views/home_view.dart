@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../constants.dart';
-import '../widgets/add_list_fab.dart';
+import '../widgets/add_task_fab.dart';
 import '../widgets/drawer_tile.dart';
 import '../widgets/logo_drawer_header.dart';
 import 'search_view.dart';
@@ -101,7 +101,7 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
-      floatingActionButton: const AddListFab(),
+      floatingActionButton: const AddTaskFAB(),
     );
   }
 }
