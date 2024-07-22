@@ -2,6 +2,7 @@ import 'package:check_mate/constants.dart';
 import 'package:check_mate/widgets/label_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({super.key});
@@ -11,13 +12,24 @@ class TaskTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Slidable(
+        startActionPane: ActionPane(
+          motion: const ScrollMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (context) {},
+              icon: FontAwesomeIcons.mapPin,
+              backgroundColor: kPrimaryColor,
+              foregroundColor: kBackgroundColor,
+            ),
+          ],
+        ),
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
               onPressed: (context) {},
               icon: Icons.edit,
-              backgroundColor: kPrimaryColor,
+              backgroundColor: Colors.blue,
               foregroundColor: kBackgroundColor,
             ),
             SlidableAction(
@@ -29,7 +41,7 @@ class TaskTile extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          tileColor: Colors.blue,
+          tileColor: Colors.green[200],
           contentPadding: const EdgeInsets.symmetric(horizontal: 2),
           horizontalTitleGap: 0,
           leading: IconButton(
