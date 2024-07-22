@@ -21,6 +21,7 @@ class _DialogContentState extends State<DialogContent> {
   final formKey = GlobalKey<FormState>();
   var autovalidateMode = AutovalidateMode.disabled;
   String? title;
+  String? label;
 
   DropdownMenuItem<String> toDropdownItem(label) {
     return DropdownMenuItem(
@@ -58,6 +59,7 @@ class _DialogContentState extends State<DialogContent> {
               borderRadius: BorderRadius.circular(8),
             ),
             child: DropdownButton(
+              value: label,
               isExpanded: true,
               iconEnabledColor: kPrimaryColor,
               padding: const EdgeInsets.only(left: 16, right: 8),
@@ -65,7 +67,7 @@ class _DialogContentState extends State<DialogContent> {
               dropdownColor: const Color(0xFFE3E2E2),
               hint: const Text('Task label'),
               items: widget.labels.map(toDropdownItem).toList(),
-              onChanged: (value) {},
+              onChanged: (value) => setState(() => label = value),
             ),
           ),
         ],
