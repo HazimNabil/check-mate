@@ -56,6 +56,28 @@ class TaskDialog extends StatelessWidget {
           ),
         ],
       ),
+      actions: [
+        TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            overlayColor: Colors.grey[900],
+          ),
+          child: const Text(
+            'Save',
+            style: TextStyle(color: kPrimaryColor),
+          ),
+        ),
+        TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            overlayColor: Colors.grey[900],
+          ),
+          child: const Text(
+            'Cancel',
+            style: TextStyle(color: kPrimaryColor),
+          ),
+        ),
+      ],
     );
   }
 }
