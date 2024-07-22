@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'task_tile.dart';
 
-class ActiveTasksBody extends StatelessWidget {
-  const ActiveTasksBody({super.key});
+class AllTasksPopulated extends StatelessWidget {
+  const AllTasksPopulated({super.key});
 
   @override
   Widget build(BuildContext context) {

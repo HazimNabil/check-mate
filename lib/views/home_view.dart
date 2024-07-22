@@ -1,5 +1,5 @@
 import 'package:check_mate/views/login_view.dart';
-import 'package:check_mate/widgets/active_tasks_body.dart';
+import 'package:check_mate/widgets/all_tasks_populated.dart';
 import 'package:check_mate/widgets/all_tasks_builder.dart';
 import 'package:check_mate/widgets/pinned_lists_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,7 +68,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: const ActiveTasksBody(),
+      body: const AllTasksPopulated(),
       endDrawer: Drawer(
         backgroundColor: kBackgroundColor,
         child: ListView(
