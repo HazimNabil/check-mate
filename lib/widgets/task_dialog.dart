@@ -40,15 +40,15 @@ class _TaskDialogState extends State<TaskDialog> {
   int getLabelColor(String label) {
     switch (label.toLowerCase()) {
       case 'personal':
-        return const Color(0xFFFF7F7F).value; // Soft Coral
+        return const Color(0xFFFF7F7F).value;
       case 'work':
-        return const Color(0xFF00308F).value; // Deep Navy Blue
+        return const Color(0xFF4682B4).value;
       case 'finance':
-        return const Color(0xFF50C878).value; // Emerald Green
+        return const Color(0xFF50C878).value;
       case 'other':
-        return const Color(0xFF9966CC).value; // Amethyst Purple
+        return const Color(0xFF9966CC).value;
       default:
-        return Colors.grey.value; // Default color if category doesn't match
+        return Colors.grey.value;
     }
   }
 
