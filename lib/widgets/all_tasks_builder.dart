@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'new_list_button.dart';
 
-class AllListWidget extends StatelessWidget {
-  const AllListWidget({super.key});
+class AllTasksBuilder extends StatelessWidget {
+  const AllTasksBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
