@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../models/task_model.dart';
+
 class TaskTile extends StatelessWidget {
-  const TaskTile({super.key});
+  final Task task;
+
+  const TaskTile({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class TaskTile extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          tileColor: Colors.green[200],
+          tileColor: Color(task.color),
           contentPadding: const EdgeInsets.symmetric(horizontal: 2),
           horizontalTitleGap: 0,
           leading: IconButton(
@@ -51,18 +55,18 @@ class TaskTile extends StatelessWidget {
             ),
             onPressed: () {},
           ),
-          title: const Padding(
-            padding: EdgeInsets.only(right: 8.0),
+          title: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
             child: Text(
-              "Write code",
-              style: TextStyle(
+              task.title,
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          trailing: const LabelItem(
-            label: 'Finance',
+          trailing: LabelItem(
+            label: task.label,
             color: kPrimaryColor,
           ),
           shape: RoundedRectangleBorder(
