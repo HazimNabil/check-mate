@@ -57,6 +57,7 @@ class _TaskTileState extends State<TaskTile> {
                   EditTaskDialog(
                     oldTitle: widget.task.title,
                     oldLabel: widget.task.label,
+                    taskId: widget.taskId,
                   ),
                 );
               },
