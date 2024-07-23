@@ -10,14 +10,14 @@ import '../helper/get_label_color.dart';
 import 'action_button.dart';
 import 'custom_text_field.dart';
 
-class TaskDialog extends StatefulWidget {
-  const TaskDialog({super.key});
+class AddTaskDialog extends StatefulWidget {
+  const AddTaskDialog({super.key});
 
   @override
-  State<TaskDialog> createState() => _TaskDialogState();
+  State<AddTaskDialog> createState() => _AddTaskDialogState();
 }
 
-class _TaskDialogState extends State<TaskDialog> {
+class _AddTaskDialogState extends State<AddTaskDialog> {
   final formKey = GlobalKey<FormState>();
   var autovalidateMode = AutovalidateMode.disabled;
   String? title;
