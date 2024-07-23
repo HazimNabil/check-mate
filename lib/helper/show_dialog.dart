@@ -1,7 +1,6 @@
-import 'package:check_mate/widgets/task_dialog.dart';
 import 'package:flutter/material.dart';
 
-void showTaskDialog(BuildContext context, TaskDialog dialog) {
+void showTaskDialog(BuildContext context, StatefulWidget dialog) {
   showDialog(
     context: context,
     builder: (context) {

@@ -1,4 +1,5 @@
 import 'package:check_mate/constants.dart';
+import 'package:check_mate/helper/show_dialog.dart';
 import 'package:check_mate/helper/show_snack_bar.dart';
 import 'package:check_mate/widgets/label_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/task_model.dart';
+import 'edit_task_dialog.dart';
 
 class TaskTile extends StatefulWidget {
   final Task task;
@@ -49,7 +51,15 @@ class _TaskTileState extends State<TaskTile> {
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: (context) {
+                showTaskDialog(
+                  context,
+                  EditTaskDialog(
+                    oldTitle: widget.task.title,
+                    oldLabel: widget.task.label,
+                  ),
+                );
+              },
               icon: Icons.edit,
               backgroundColor: Colors.blue,
               foregroundColor: kBackgroundColor,
