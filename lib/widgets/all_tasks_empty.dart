@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'new_list_button.dart';
-
 class AllTasksEmpty extends StatelessWidget {
   const AllTasksEmpty({super.key});
 
@@ -21,7 +19,6 @@ class AllTasksEmpty extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 48),
-          const NewListButton(),
         ],
       ),
     );
