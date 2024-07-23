@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../constants.dart';
+import '../helper/get_label_color.dart';
 import 'action_button.dart';
 import 'custom_text_field.dart';
 
@@ -23,21 +24,6 @@ class _TaskDialogState extends State<TaskDialog> {
   String? label;
   late int color;
   bool isLoading = false;
-
-  int getLabelColor(String label) {
-    switch (label.toLowerCase()) {
-      case 'personal':
-        return const Color(0xFFFF7F7F).value;
-      case 'work':
-        return const Color(0xFF4682B4).value;
-      case 'finance':
-        return const Color(0xFF50C878).value;
-      case 'other':
-        return const Color(0xFF9966CC).value;
-      default:
-        return Colors.grey.value;
-    }
-  }
 
   Future<void> addTask() async {
     if (formKey.currentState!.validate()) {
