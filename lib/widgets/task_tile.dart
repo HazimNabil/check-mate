@@ -1,15 +1,33 @@
 import 'package:check_mate/constants.dart';
+import 'package:check_mate/helper/show_snack_bar.dart';
 import 'package:check_mate/widgets/label_item.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/task_model.dart';
 
-class TaskTile extends StatelessWidget {
+class TaskTile extends StatefulWidget {
   final Task task;
+  final String taskId;
 
-  const TaskTile({super.key, required this.task});
+  const TaskTile({super.key, required this.task, required this.taskId});
+
+  @override
+  State<TaskTile> createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
+  var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
+
+  void deleteTask(context) async {
+    try {
+      await taskCollection.doc(widget.taskId).delete();
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +55,7 @@ class TaskTile extends StatelessWidget {
               foregroundColor: kBackgroundColor,
             ),
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: deleteTask,
               icon: Icons.delete,
               backgroundColor: Colors.red,
               foregroundColor: kBackgroundColor,
@@ -45,7 +63,7 @@ class TaskTile extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          tileColor: Color(task.color),
+          tileColor: Color(widget.task.color),
           contentPadding: const EdgeInsets.symmetric(horizontal: 2),
           horizontalTitleGap: 0,
           leading: IconButton(
@@ -58,7 +76,7 @@ class TaskTile extends StatelessWidget {
           title: Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: Text(
-              task.title,
+              widget.task.title,
               style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -66,7 +84,7 @@ class TaskTile extends StatelessWidget {
             ),
           ),
           trailing: LabelItem(
-            label: task.label,
+            label: widget.task.label,
             color: kPrimaryColor,
           ),
           shape: RoundedRectangleBorder(

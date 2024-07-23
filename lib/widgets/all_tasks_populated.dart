@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../models/task_model.dart';
 import 'task_tile.dart';
 
 class AllTasksPopulated extends StatelessWidget {
-  final List<Task> tasks;
+  final List<QueryDocumentSnapshot> tasks;
+
   const AllTasksPopulated({super.key, required this.tasks});
 
   @override
@@ -14,7 +16,10 @@ class AllTasksPopulated extends StatelessWidget {
       child: ListView.builder(
         itemCount: tasks.length,
         itemBuilder: (context, index) {
-          return TaskTile(task: tasks[index]);
+          return TaskTile(
+            task: Task.fromJson(tasks[index]),
+            taskId: tasks[index].id,
+          );
         },
       ),
     );

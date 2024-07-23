@@ -34,8 +34,7 @@ class _AllTasksBuilderState extends State<AllTasksBuilder> {
           if (snapshot.data!.docs.isEmpty) {
             return const AllTasksEmpty();
           } else {
-            var docs = snapshot.data!.docs;
-            return AllTasksPopulated(tasks: docs.map(toTask).toList());
+            return AllTasksPopulated(tasks: snapshot.data!.docs);
           }
         } else if (snapshot.hasError) {
           return Center(
