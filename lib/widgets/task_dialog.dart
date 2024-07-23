@@ -1,4 +1,5 @@
 import 'package:check_mate/helper/show_snack_bar.dart';
+import 'package:check_mate/widgets/label_drop_selector.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,26 +17,12 @@ class TaskDialog extends StatefulWidget {
 }
 
 class _TaskDialogState extends State<TaskDialog> {
-  final labels = const [
-    'Personal',
-    'Work',
-    'Finance',
-    'Other',
-  ];
-
   final formKey = GlobalKey<FormState>();
   var autovalidateMode = AutovalidateMode.disabled;
   String? title;
   String? label;
   late int color;
   bool isLoading = false;
-
-  DropdownMenuItem<String> toDropdownItem(label) {
-    return DropdownMenuItem(
-      value: label,
-      child: Text(label),
-    );
-  }
 
   int getLabelColor(String label) {
     switch (label.toLowerCase()) {
@@ -78,6 +65,13 @@ class _TaskDialogState extends State<TaskDialog> {
     }
   }
 
+  String? validateTitle(data) {
+    if (data?.isEmpty ?? true) {
+      return 'This field is required';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -100,40 +94,15 @@ class _TaskDialogState extends State<TaskDialog> {
                 child: CustomTextField(
                   hint: 'Task title',
                   onChanged: (data) => title = data,
-                  validator: (data) {
-                    if (data?.isEmpty ?? true) {
-                      return 'This field is required';
-                    }
-                    return null;
-                  },
+                  validator: validateTitle,
                 ),
               ),
               const SizedBox(height: 10),
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE3E2E2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: DropdownButtonFormField(
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return 'This field is required';
-                    }
-                    return null;
-                  },
-                  value: label,
-                  isExpanded: true,
-                  iconEnabledColor: kPrimaryColor,
-                  padding: const EdgeInsets.only(left: 16, right: 8),
-                  borderRadius: BorderRadius.circular(8),
-                  dropdownColor: const Color(0xFFE3E2E2),
-                  hint: const Text('Task label'),
-                  items: labels.map(toDropdownItem).toList(),
-                  onChanged: (value) => setState(() => label = value),
-                ),
-              ),
+              LabelDropSelector(
+                label: label,
+                hint: 'Task label',
+                onChanged: (value) => setState(() => label = value),
+              )
             ],
           ),
         ),
