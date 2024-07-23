@@ -31,8 +31,19 @@ class _TaskTileState extends State<TaskTile> {
     }
   }
 
+  void toggleCheck() async {
+    var isChecked = widget.task.isChecked ? false : true;
+    try {
+      await taskCollection.doc(widget.taskId).update({'isChecked': isChecked});
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    var icon =
+        widget.task.isChecked ? Icons.check_box : Icons.check_box_outline_blank;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Slidable(
@@ -78,11 +89,12 @@ class _TaskTileState extends State<TaskTile> {
           contentPadding: const EdgeInsets.symmetric(horizontal: 2),
           horizontalTitleGap: 0,
           leading: IconButton(
-            icon: const Icon(
-              Icons.check_box_outline_blank,
+            icon: Icon(
+              icon,
               size: 21,
+              color: kPrimaryColor,
             ),
-            onPressed: () {},
+            onPressed: toggleCheck,
           ),
           title: Padding(
             padding: const EdgeInsets.only(right: 8.0),
