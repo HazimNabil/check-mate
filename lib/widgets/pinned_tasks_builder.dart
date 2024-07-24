@@ -1,5 +1,5 @@
 import 'package:check_mate/constants.dart';
-import 'package:check_mate/widgets/all_tasks_populated.dart';
+import 'package:check_mate/widgets/task_list.dart';
 import 'package:check_mate/widgets/loading_indicator.dart';
 import 'package:check_mate/widgets/pinned_tasks_empty.dart';
 import 'package:check_mate/widgets/something_went_wrong.dart';
@@ -32,7 +32,7 @@ class _PinnedTasksBuilderState extends State<PinnedTasksBuilder> {
           if (snapshot.data!.docs.isEmpty) {
             return const PinnedTasksEmpty();
           } else {
-            return AllTasksPopulated(tasks: snapshot.data!.docs);
+            return TaskList(tasks: snapshot.data!.docs);
           }
         } else if (snapshot.hasError) {
           return SomethingWentWrong(message: snapshot.error.toString());

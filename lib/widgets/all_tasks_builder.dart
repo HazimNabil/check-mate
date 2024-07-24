@@ -1,11 +1,11 @@
 import 'package:check_mate/constants.dart';
-import 'package:check_mate/widgets/all_tasks_populated.dart';
 import 'package:check_mate/widgets/loading_indicator.dart';
 import 'package:check_mate/widgets/something_went_wrong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'all_tasks_empty.dart';
+import 'task_list.dart';
 
 class AllTasksBuilder extends StatefulWidget {
   const AllTasksBuilder({super.key});
@@ -33,7 +33,7 @@ class _AllTasksBuilderState extends State<AllTasksBuilder> {
           if (snapshot.data!.docs.isEmpty) {
             return const AllTasksEmpty();
           } else {
-            return AllTasksPopulated(tasks: snapshot.data!.docs);
+            return TaskList(tasks: snapshot.data!.docs);
           }
         } else if (snapshot.hasError) {
           return SomethingWentWrong(message: snapshot.error.toString());
