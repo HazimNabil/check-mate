@@ -53,6 +53,17 @@ class _TaskTileState extends State<TaskTile> {
     return (icon, decoration);
   }
 
+  void showEditDialog(context) {
+    showTaskDialog(
+      context,
+      EditTaskDialog(
+        oldTitle: widget.task.title,
+        oldLabel: widget.task.label,
+        taskId: widget.taskId,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var (icon, decoration) = getTaskCheckState();
@@ -74,16 +85,7 @@ class _TaskTileState extends State<TaskTile> {
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {
-                showTaskDialog(
-                  context,
-                  EditTaskDialog(
-                    oldTitle: widget.task.title,
-                    oldLabel: widget.task.label,
-                    taskId: widget.taskId,
-                  ),
-                );
-              },
+              onPressed: showEditDialog,
               icon: Icons.edit,
               backgroundColor: Colors.blue,
               foregroundColor: kBackgroundColor,
