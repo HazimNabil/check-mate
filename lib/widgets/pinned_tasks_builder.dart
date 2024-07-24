@@ -1,5 +1,4 @@
 import 'package:check_mate/constants.dart';
-import 'package:check_mate/models/task_model.dart';
 import 'package:check_mate/widgets/all_tasks_populated.dart';
 import 'package:check_mate/widgets/loading_indicator.dart';
 import 'package:check_mate/widgets/pinned_tasks_empty.dart';
@@ -23,8 +22,6 @@ class _PinnedTasksBuilderState extends State<PinnedTasksBuilder> {
     var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
     stream = taskCollection.where('isPinned', isEqualTo: true).snapshots();
   }
-
-  Task toTask(task) => Task.fromJson(task);
 
   @override
   Widget build(BuildContext context) {
