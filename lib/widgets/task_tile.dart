@@ -23,7 +23,7 @@ class TaskTile extends StatefulWidget {
 class _TaskTileState extends State<TaskTile> {
   var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
 
-  void deleteTask(context) async {
+  void deleteTask(deleteContext) async {
     try {
       await taskCollection.doc(widget.taskId).delete();
     } catch (e) {
@@ -64,6 +64,15 @@ class _TaskTileState extends State<TaskTile> {
     );
   }
 
+  void pinTask(pinContext) async {
+    try {
+      await taskCollection.doc(widget.taskId).update({'isPinned': true});
+      showSnackBar(context, 'Task pinned successfully');
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var (icon, decoration) = getTaskCheckState();
@@ -75,7 +84,7 @@ class _TaskTileState extends State<TaskTile> {
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: pinTask,
               icon: FontAwesomeIcons.mapPin,
               backgroundColor: kPrimaryColor,
               foregroundColor: kBackgroundColor,
