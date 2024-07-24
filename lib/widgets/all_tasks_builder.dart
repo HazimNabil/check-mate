@@ -1,6 +1,8 @@
 import 'package:check_mate/constants.dart';
 import 'package:check_mate/models/task_model.dart';
 import 'package:check_mate/widgets/all_tasks_populated.dart';
+import 'package:check_mate/widgets/loading_indicator.dart';
+import 'package:check_mate/widgets/something_went_wrong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -37,21 +39,9 @@ class _AllTasksBuilderState extends State<AllTasksBuilder> {
             return AllTasksPopulated(tasks: snapshot.data!.docs);
           }
         } else if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              snapshot.error.toString(),
-              style: const TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          );
+          return SomethingWentWrong(message: snapshot.error.toString());
         } else {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: kPrimaryColor,
-            ),
-          );
+          return const LoadingIndicator();
         }
       },
     );
