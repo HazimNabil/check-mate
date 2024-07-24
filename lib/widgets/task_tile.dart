@@ -70,6 +70,7 @@ class _TaskTileState extends State<TaskTile> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Slidable(
+        key: ValueKey(widget.taskId),
         startActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
