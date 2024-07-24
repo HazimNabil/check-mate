@@ -40,10 +40,22 @@ class _TaskTileState extends State<TaskTile> {
     }
   }
 
+  (IconData, TextDecoration?) getTaskCheckState() {
+    IconData icon;
+    TextDecoration? decoration;
+    if (widget.task.isChecked) {
+      icon = Icons.check_box;
+      decoration = TextDecoration.lineThrough;
+    } else {
+      icon = Icons.check_box_outline_blank;
+      decoration = null;
+    }
+    return (icon, decoration);
+  }
+
   @override
   Widget build(BuildContext context) {
-    var icon =
-        widget.task.isChecked ? Icons.check_box : Icons.check_box_outline_blank;
+    var (icon, decoration) = getTaskCheckState();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Slidable(
@@ -100,9 +112,13 @@ class _TaskTileState extends State<TaskTile> {
             padding: const EdgeInsets.only(right: 8.0),
             child: Text(
               widget.task.title,
-              style: const TextStyle(
+              style: TextStyle(
+                color: kPrimaryColor,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
+                decoration: decoration,
+                decorationThickness: 2,
+                decorationColor: kPrimaryColor,
               ),
             ),
           ),
