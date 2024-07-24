@@ -1,12 +1,58 @@
+import 'package:check_mate/constants.dart';
+import 'package:check_mate/models/task_model.dart';
+import 'package:check_mate/widgets/all_tasks_populated.dart';
+import 'package:check_mate/widgets/pinned_tasks_empty.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'pinned_tasks_empty.dart';
-
-class PinnedTasksBuilder extends StatelessWidget {
+class PinnedTasksBuilder extends StatefulWidget {
   const PinnedTasksBuilder({super.key});
 
   @override
+  State<PinnedTasksBuilder> createState() => _PinnedTasksBuilderState();
+}
+
+class _PinnedTasksBuilderState extends State<PinnedTasksBuilder> {
+  dynamic stream;
+
+  @override
+  void initState() {
+    super.initState();
+    var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
+    stream = taskCollection.where('isPinned', isEqualTo: true).snapshots();
+  }
+
+  Task toTask(task) => Task.fromJson(task);
+
+  @override
   Widget build(BuildContext context) {
-    return const PinnedTasksEmpty();
+    return StreamBuilder<QuerySnapshot>(
+      stream: stream,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data!.docs.isEmpty) {
+            return const PinnedTasksEmpty();
+          } else {
+            return AllTasksPopulated(tasks: snapshot.data!.docs);
+          }
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              snapshot.error.toString(),
+              style: const TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: kPrimaryColor,
+            ),
+          );
+        }
+      },
+    );
   }
 }
