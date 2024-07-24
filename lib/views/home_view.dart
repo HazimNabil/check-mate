@@ -1,6 +1,6 @@
 import 'package:check_mate/views/login_view.dart';
 import 'package:check_mate/widgets/all_tasks_builder.dart';
-import 'package:check_mate/widgets/pinned_lists_widget.dart';
+import 'package:check_mate/widgets/pinned_tasks_builder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,7 +24,7 @@ class _HomeViewState extends State<HomeView> {
   int currentIndex = 0;
   final bodies = const [
     AllTasksBuilder(),
-    PinnedListWidget(),
+    PinnedTasksBuilder(),
   ];
 
   void logout() {
@@ -67,7 +67,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: const AllTasksBuilder(),
+      body: bodies[currentIndex],
       endDrawer: Drawer(
         backgroundColor: kBackgroundColor,
         child: ListView(

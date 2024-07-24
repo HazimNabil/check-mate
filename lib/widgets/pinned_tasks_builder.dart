@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PinnedListWidget extends StatelessWidget {
-  const PinnedListWidget({super.key});
+class PinnedTasksBuilder extends StatelessWidget {
+  const PinnedTasksBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
