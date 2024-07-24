@@ -78,6 +78,10 @@ class _TaskTileState extends State<TaskTile> {
               icon: FontAwesomeIcons.mapPin,
               backgroundColor: kPrimaryColor,
               foregroundColor: kBackgroundColor,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+              ),
             ),
           ],
         ),
@@ -87,7 +91,7 @@ class _TaskTileState extends State<TaskTile> {
             SlidableAction(
               onPressed: showEditDialog,
               icon: Icons.edit,
-              backgroundColor: Colors.blue,
+              backgroundColor: kPrimaryColor,
               foregroundColor: kBackgroundColor,
             ),
             SlidableAction(
@@ -95,6 +99,10 @@ class _TaskTileState extends State<TaskTile> {
               icon: Icons.delete,
               backgroundColor: Colors.red,
               foregroundColor: kBackgroundColor,
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+              ),
             ),
           ],
         ),
@@ -129,7 +137,7 @@ class _TaskTileState extends State<TaskTile> {
             color: kPrimaryColor,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ),
