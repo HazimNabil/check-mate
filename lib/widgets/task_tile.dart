@@ -5,7 +5,6 @@ import 'package:check_mate/widgets/label_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/task_model.dart';
 import 'edit_task_dialog.dart';
@@ -53,6 +52,19 @@ class _TaskTileState extends State<TaskTile> {
     return (icon, decoration);
   }
 
+  (IconData, void Function(BuildContext)) getTaskPinState() {
+    IconData icon;
+    void Function(BuildContext) pinMethod;
+    if (widget.task.isPinned) {
+      icon = Icons.push_pin_outlined;
+      pinMethod = unpinTask;
+    } else {
+      icon = Icons.push_pin;
+      pinMethod = pinTask;
+    }
+    return (icon, pinMethod);
+  }
+
   void showEditDialog(context) {
     showTaskDialog(
       context,
@@ -73,9 +85,19 @@ class _TaskTileState extends State<TaskTile> {
     }
   }
 
+  void unpinTask(pinContext) async {
+    try {
+      await taskCollection.doc(widget.taskId).update({'isPinned': false});
+      showSnackBar(context, 'Task pinned successfully');
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var (icon, decoration) = getTaskCheckState();
+    var (checkIcon, decoration) = getTaskCheckState();
+    var (pinIcon, pinMethod) = getTaskPinState();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Slidable(
@@ -84,8 +106,8 @@ class _TaskTileState extends State<TaskTile> {
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: pinTask,
-              icon: FontAwesomeIcons.mapPin,
+              onPressed: pinMethod,
+              icon: pinIcon,
               backgroundColor: kPrimaryColor,
               foregroundColor: kBackgroundColor,
               borderRadius: const BorderRadius.only(
@@ -122,7 +144,7 @@ class _TaskTileState extends State<TaskTile> {
           horizontalTitleGap: 0,
           leading: IconButton(
             icon: Icon(
-              icon,
+              checkIcon,
               size: 21,
               color: kPrimaryColor,
             ),
