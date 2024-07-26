@@ -23,4 +23,12 @@ class TaskService {
       throw FormatException(e.toString());
     }
   }
+
+  Future<void> deleteTask(String taskId) async {
+    try {
+      await taskCollection.doc(taskId).delete();
+    } catch (e) {
+      throw FormatException(e.toString());
+    }
+  }
 }
