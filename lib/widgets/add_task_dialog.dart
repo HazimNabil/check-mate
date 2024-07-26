@@ -1,7 +1,6 @@
-import 'package:check_mate/helper/show_snack_bar.dart';
+import 'package:check_mate/models/task_model.dart';
+import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/label_drop_selector.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -25,33 +24,21 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
   late int color;
   bool isLoading = false;
 
-  Future<void> addTask() async {
+  Future<void> save() async {
     if (formKey.currentState!.validate()) {
       setState(() => isLoading = true);
-      var tasks = FirebaseFirestore.instance.collection(kTaskCollection);
-      var userId = FirebaseAuth.instance.currentUser!.uid;
-      try {
-        await tasks.add({
-          'id': userId,
-          'title': title,
-          'isChecked': false,
-          'isPinned': false,
-          'label': label,
-          'color': getLabelColor(label!),
-        });
-        setState(() => isLoading = false);
-        if (mounted) {
-          Navigator.pop(context);
-        }
-      } catch (e) {
-        if (mounted) {
-          showSnackBar(context, e.toString());
-        }
-        setState(() => isLoading = false);
-      }
+      var task = Task(
+        title: title!,
+        isChecked: false,
+        isPinned: false,
+        color: getLabelColor(label!),
+        label: label!,
+      );
+      await TaskService().addTask(task, context);
+      setState(() => isLoading = false);
+      if (mounted) Navigator.pop(context);
     } else {
-      autovalidateMode = AutovalidateMode.always;
-      setState(() {});
+      setState(() => autovalidateMode = AutovalidateMode.always);
     }
   }
 
@@ -99,7 +86,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
         actions: [
           ActionButton(
             text: 'Save',
-            onPressed: addTask,
+            onPressed: save,
           ),
           ActionButton(
             text: 'Cancel',

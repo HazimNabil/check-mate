@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import '../helper/get_label_color.dart';
+import '../helper/show_snack_bar.dart';
 import '../models/task_model.dart';
 
 class TaskService {
   var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
 
-  Future<void> addTask(Task task) async {
+  Future<void> addTask(Task task, BuildContext context) async {
     var userId = FirebaseAuth.instance.currentUser!.uid;
     try {
       await taskCollection.add({
@@ -20,7 +22,7 @@ class TaskService {
         'color': getLabelColor(task.label),
       });
     } catch (e) {
-      throw FormatException(e.toString());
+      if (context.mounted) showSnackBar(context, e.toString());
     }
   }
 
