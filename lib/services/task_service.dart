@@ -26,11 +26,11 @@ class TaskService {
     }
   }
 
-  Future<void> deleteTask(String taskId) async {
+  Future<void> deleteTask(String taskId, BuildContext context) async {
     try {
       await taskCollection.doc(taskId).delete();
     } catch (e) {
-      throw FormatException(e.toString());
+      if (context.mounted) showSnackBar(context, e.toString());
     }
   }
 

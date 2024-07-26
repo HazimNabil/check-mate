@@ -1,6 +1,7 @@
 import 'package:check_mate/constants.dart';
 import 'package:check_mate/helper/show_dialog.dart';
 import 'package:check_mate/helper/show_snack_bar.dart';
+import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/label_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +23,8 @@ class TaskTile extends StatefulWidget {
 class _TaskTileState extends State<TaskTile> {
   var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
 
-  void deleteTask(deleteContext) async {
-    try {
-      await taskCollection.doc(widget.taskId).delete();
-    } catch (e) {
-      if (mounted) {
-        showSnackBar(context, e.toString());
-      }
-    }
+  Future<void> delete(BuildContext context) async {
+    await TaskService().deleteTask(widget.taskId, context);
   }
 
   void toggleCheck() async {
@@ -139,7 +134,7 @@ class _TaskTileState extends State<TaskTile> {
               foregroundColor: kBackgroundColor,
             ),
             SlidableAction(
-              onPressed: deleteTask,
+              onPressed: delete,
               icon: Icons.delete,
               backgroundColor: Colors.red,
               foregroundColor: kBackgroundColor,
