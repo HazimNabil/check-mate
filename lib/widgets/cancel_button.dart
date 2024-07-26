@@ -12,7 +12,9 @@ class CancelButton extends StatelessWidget {
           FocusScope.of(context).unfocus();
           await Future.delayed(const Duration(milliseconds: 520));
         }
-        Navigator.pop(context);
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
       },
       child: const Padding(
         padding: EdgeInsets.only(right: 16),

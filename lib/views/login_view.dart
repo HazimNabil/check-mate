@@ -33,22 +33,30 @@ class _LoginViewState extends State<LoginView> {
           email: email!,
           password: password!,
         );
-        showSnackBar(
-          context,
-          'Login successful! Welcome back!',
-        );
-        Navigator.pushReplacementNamed(context, HomeView.route);
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'invalid-credential') {
+        if (mounted) {
           showSnackBar(
             context,
-            'Invalid credentials. Please double-check your email and password, and try again',
+            'Login successful! Welcome back!',
           );
+          Navigator.pushReplacementNamed(context, HomeView.route);
+        }
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'invalid-credential') {
+          if (mounted) {
+            showSnackBar(
+              context,
+              'Invalid credentials. Please double-check your email and password, and try again',
+            );
+          }
         } else {
-          showSnackBar(context, e.code);
+          if (mounted) {
+            showSnackBar(context, e.code);
+          }
         }
       } catch (e) {
-        showSnackBar(context, e.toString());
+        if (mounted) {
+          showSnackBar(context, e.toString());
+        }
       }
       setState(() => isLoading = false);
     } else {

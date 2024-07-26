@@ -33,25 +33,33 @@ class _RegisterViewState extends State<RegisterView> {
           email: email!,
           password: password!,
         );
-        showSnackBar(
-          context,
-          'Registration completed successfully! Welcome aboard!',
-        );
-        Navigator.pushReplacementNamed(context, HomeView.route);
+        if (mounted) {
+          showSnackBar(
+            context,
+            'Registration completed successfully! Welcome aboard!',
+          );
+          Navigator.pushReplacementNamed(context, HomeView.route);
+        }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          showSnackBar(
-            context,
-            'The provided password is too weak',
-          );
+          if (mounted) {
+            showSnackBar(
+              context,
+              'The provided password is too weak',
+            );
+          }
         } else if (e.code == 'email-already-in-use') {
-          showSnackBar(
-            context,
-            'The provided email is already used',
-          );
+          if (mounted) {
+            showSnackBar(
+              context,
+              'The provided email is already used',
+            );
+          }
         }
       } catch (e) {
-        showSnackBar(context, e.toString());
+        if (mounted) {
+          showSnackBar(context, e.toString());
+        }
       }
       setState(() => isLoading = false);
     } else {

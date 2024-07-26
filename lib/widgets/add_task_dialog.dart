@@ -40,9 +40,13 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
           'color': getLabelColor(label!),
         });
         setState(() => isLoading = false);
-        Navigator.pop(context);
+        if (mounted) {
+          Navigator.pop(context);
+        }
       } catch (e) {
-        showSnackBar(context, e.toString());
+        if (mounted) {
+          showSnackBar(context, e.toString());
+        }
         setState(() => isLoading = false);
       }
     } else {

@@ -26,7 +26,9 @@ class _TaskTileState extends State<TaskTile> {
     try {
       await taskCollection.doc(widget.taskId).delete();
     } catch (e) {
-      showSnackBar(context, e.toString());
+      if (mounted) {
+        showSnackBar(context, e.toString());
+      }
     }
   }
 
@@ -35,7 +37,9 @@ class _TaskTileState extends State<TaskTile> {
     try {
       await taskCollection.doc(widget.taskId).update({'isChecked': isChecked});
     } catch (e) {
-      showSnackBar(context, e.toString());
+      if (mounted) {
+        showSnackBar(context, e.toString());
+      }
     }
   }
 
@@ -79,18 +83,26 @@ class _TaskTileState extends State<TaskTile> {
   void pinTask(pinContext) async {
     try {
       await taskCollection.doc(widget.taskId).update({'isPinned': true});
-      showSnackBar(context, 'Task pinned successfully');
+      if (mounted) {
+        showSnackBar(context, 'Task pinned successfully');
+      }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      if (mounted) {
+        showSnackBar(context, e.toString());
+      }
     }
   }
 
   void unpinTask(pinContext) async {
     try {
       await taskCollection.doc(widget.taskId).update({'isPinned': false});
-      showSnackBar(context, 'Task unpinned successfully');
+      if (mounted) {
+        showSnackBar(context, 'Task unpinned successfully');
+      }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      if (mounted) {
+        showSnackBar(context, e.toString());
+      }
     }
   }
 
