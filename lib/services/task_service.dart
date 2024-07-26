@@ -34,11 +34,15 @@ class TaskService {
     }
   }
 
-  Future<void> editTask(String taskId, Map<String, dynamic> fields) async {
+  Future<void> editTask(
+    String taskId,
+    Map<String, dynamic> fields,
+    BuildContext context,
+  ) async {
     try {
       await taskCollection.doc(taskId).update(fields);
     } catch (e) {
-      throw FormatException(e.toString());
+      if (context.mounted) showSnackBar(context, e.toString());
     }
   }
 
