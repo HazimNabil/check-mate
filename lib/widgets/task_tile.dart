@@ -88,7 +88,7 @@ class _TaskTileState extends State<TaskTile> {
   void unpinTask(pinContext) async {
     try {
       await taskCollection.doc(widget.taskId).update({'isPinned': false});
-      showSnackBar(context, 'Task pinned successfully');
+      showSnackBar(context, 'Task unpinned successfully');
     } catch (e) {
       showSnackBar(context, e.toString());
     }
