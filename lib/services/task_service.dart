@@ -31,4 +31,12 @@ class TaskService {
       throw FormatException(e.toString());
     }
   }
+
+  Future<void> editTask(String taskId, Map<String, dynamic> fields) async {
+    try {
+      await taskCollection.doc(taskId).update(fields);
+    } catch (e) {
+      throw FormatException(e.toString());
+    }
+  }
 }
