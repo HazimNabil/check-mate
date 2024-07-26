@@ -39,4 +39,8 @@ class TaskService {
       throw FormatException(e.toString());
     }
   }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> readTasks() {
+    return taskCollection.snapshots();
+  }
 }
