@@ -13,7 +13,7 @@ class TaskService {
     var userId = FirebaseAuth.instance.currentUser!.uid;
     try {
       await taskCollection.add({
-        'id': userId,
+        'userId': userId,
         'title': task.title,
         'isChecked': false,
         'isPinned': false,
@@ -43,7 +43,7 @@ class TaskService {
 
   TaskStream readTasks([bool isPinned = false]) {
     final userId = AuthService().getCurrentUserId();
-    var query = taskCollection.where('id', isEqualTo: userId);
+    var query = taskCollection.where('userId', isEqualTo: userId);
     if (isPinned) {
       query = query.where('isPinned', isEqualTo: true);
     }
