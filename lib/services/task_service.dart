@@ -66,4 +66,26 @@ class TaskService {
       if (context.mounted) showSnackBar(context, e.toString());
     }
   }
+
+  Future<void> togglePin(
+    String taskId,
+    bool isPinned,
+    BuildContext context,
+  ) async {
+    bool value;
+    String message;
+    if (isPinned) {
+      value = false;
+      message = 'Task unpinned successfully';
+    } else {
+      value = true;
+      message = 'Task pinned successfully';
+    }
+    try {
+      await taskCollection.doc(taskId).update({'isPinned': value});
+      if (context.mounted) showSnackBar(context, message);
+    } catch (e) {
+      if (context.mounted) showSnackBar(context, e.toString());
+    }
+  }
 }

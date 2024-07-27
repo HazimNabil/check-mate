@@ -1,6 +1,5 @@
 import 'package:check_mate/constants.dart';
 import 'package:check_mate/helper/show_dialog.dart';
-import 'package:check_mate/helper/show_snack_bar.dart';
 import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/label_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,7 +27,11 @@ class _TaskTileState extends State<TaskTile> {
   }
 
   Future<void> toggleCheck() async {
-    TaskService().toggleCheck(widget.taskId, widget.task.isChecked, context);
+    await TaskService().toggleCheck(
+      widget.taskId,
+      widget.task.isChecked,
+      context,
+    );
   }
 
   (IconData, TextDecoration?) getTaskCheckState() {
@@ -44,17 +47,8 @@ class _TaskTileState extends State<TaskTile> {
     return (icon, decoration);
   }
 
-  (IconData, void Function(BuildContext)) getTaskPinState() {
-    IconData icon;
-    void Function(BuildContext) pinMethod;
-    if (widget.task.isPinned) {
-      icon = Icons.push_pin_outlined;
-      pinMethod = unpinTask;
-    } else {
-      icon = Icons.push_pin;
-      pinMethod = pinTask;
-    }
-    return (icon, pinMethod);
+  IconData getTaskPinState() {
+    return widget.task.isPinned ? Icons.push_pin_outlined : Icons.push_pin;
   }
 
   void showEditDialog(context) {
@@ -68,36 +62,14 @@ class _TaskTileState extends State<TaskTile> {
     );
   }
 
-  void pinTask(pinContext) async {
-    try {
-      await taskCollection.doc(widget.taskId).update({'isPinned': true});
-      if (mounted) {
-        showSnackBar(context, 'Task pinned successfully');
-      }
-    } catch (e) {
-      if (mounted) {
-        showSnackBar(context, e.toString());
-      }
-    }
-  }
-
-  void unpinTask(pinContext) async {
-    try {
-      await taskCollection.doc(widget.taskId).update({'isPinned': false});
-      if (mounted) {
-        showSnackBar(context, 'Task unpinned successfully');
-      }
-    } catch (e) {
-      if (mounted) {
-        showSnackBar(context, e.toString());
-      }
-    }
+  Future<void> togglePin(BuildContext pinContext) async {
+    await TaskService().togglePin(widget.taskId, widget.task.isPinned, context);
   }
 
   @override
   Widget build(BuildContext context) {
     var (checkIcon, decoration) = getTaskCheckState();
-    var (pinIcon, pinMethod) = getTaskPinState();
+    var pinIcon = getTaskPinState();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Slidable(
@@ -106,7 +78,7 @@ class _TaskTileState extends State<TaskTile> {
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              onPressed: pinMethod,
+              onPressed: togglePin,
               icon: pinIcon,
               backgroundColor: kPrimaryColor,
               foregroundColor: kBackgroundColor,
