@@ -1,7 +1,7 @@
 import 'package:check_mate/constants.dart';
+import 'package:check_mate/services/auth_service.dart';
 import 'package:check_mate/views/home_view.dart';
 import 'package:check_mate/views/register_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -29,34 +29,13 @@ class _LoginViewState extends State<LoginView> {
       FocusScope.of(context).requestFocus(FocusNode());
       setState(() => isLoading = true);
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email!,
-          password: password!,
-        );
+        await AuthService().login(email, password);
         if (mounted) {
-          showSnackBar(
-            context,
-            'Login successful! Welcome back!',
-          );
+          showSnackBar(context, 'Welcome back, old friend');
           Navigator.pushReplacementNamed(context, HomeView.route);
         }
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'invalid-credential') {
-          if (mounted) {
-            showSnackBar(
-              context,
-              'Invalid credentials. Please double-check your email and password, and try again',
-            );
-          }
-        } else {
-          if (mounted) {
-            showSnackBar(context, e.code);
-          }
-        }
-      } catch (e) {
-        if (mounted) {
-          showSnackBar(context, e.toString());
-        }
+      } on FormatException catch (e) {
+        if (mounted) showSnackBar(context, e.message);
       }
       setState(() => isLoading = false);
     } else {
