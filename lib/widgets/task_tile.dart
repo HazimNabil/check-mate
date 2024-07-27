@@ -3,7 +3,6 @@ import 'package:check_mate/helper/show_dialog.dart';
 import 'package:check_mate/helper/show_snack_bar.dart';
 import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/label_item.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -21,8 +20,6 @@ class TaskTile extends StatefulWidget {
 }
 
 class _TaskTileState extends State<TaskTile> {
-  var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
-
   Future<void> delete(BuildContext deleteContext) async {
     try {
       await TaskService().deleteTask(widget.taskId);
