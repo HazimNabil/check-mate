@@ -1,3 +1,4 @@
+import 'package:check_mate/helper/show_snack_bar.dart';
 import 'package:check_mate/models/task_model.dart';
 import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/label_drop_selector.dart';
@@ -34,7 +35,11 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
         color: getLabelColor(label!),
         label: label!,
       );
-      await TaskService().addTask(task, context);
+      try {
+        await TaskService().addTask(task);
+      } on FormatException catch (e) {
+        if(mounted) showSnackBar(context, e.message);
+      }
       setState(() => isLoading = false);
       if (mounted) Navigator.pop(context);
     } else {

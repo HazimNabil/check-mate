@@ -1,4 +1,5 @@
 import 'package:check_mate/helper/get_label_color.dart';
+import 'package:check_mate/helper/show_snack_bar.dart';
 import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/label_drop_selector.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,26 @@ class _EditTaskDialogState extends State<EditTaskDialog> {
       return 'This field is required';
     }
     return null;
+  }
+
+  void editTask() async {
+    if (formKey.currentState!.validate()) {
+      setState(() => isLoading = true);
+      var fields = {
+        'title': title,
+        'label': label,
+        'color': getLabelColor(label!),
+      };
+      try {
+        await TaskService().editTask(widget.taskId, fields);
+      } on FormatException catch (e) {
+        if (mounted) showSnackBar(context, e.message);
+      }
+      setState(() => isLoading = false);
+      if (mounted) Navigator.pop(context);
+    } else {
+      setState(() => autovalidateMode = AutovalidateMode.always);
+    }
   }
 
   @override
@@ -83,21 +104,5 @@ class _EditTaskDialogState extends State<EditTaskDialog> {
         ],
       ),
     );
-  }
-
-  void editTask() async {
-    if (formKey.currentState!.validate()) {
-      setState(() => isLoading = true);
-      var fields = {
-        'title': title,
-        'label': label,
-        'color': getLabelColor(label!),
-      };
-      await TaskService().editTask(widget.taskId, fields, context);
-      setState(() => isLoading = false);
-      if (mounted) Navigator.pop(context);
-    } else {
-      setState(() => autovalidateMode = AutovalidateMode.always);
-    }
   }
 }

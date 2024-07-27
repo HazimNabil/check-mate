@@ -1,5 +1,6 @@
 import 'package:check_mate/constants.dart';
 import 'package:check_mate/helper/show_dialog.dart';
+import 'package:check_mate/helper/show_snack_bar.dart';
 import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/label_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,16 +23,23 @@ class TaskTile extends StatefulWidget {
 class _TaskTileState extends State<TaskTile> {
   var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
 
-  Future<void> delete(BuildContext context) async {
-    await TaskService().deleteTask(widget.taskId, context);
+  Future<void> delete(BuildContext deleteContext) async {
+    try {
+      await TaskService().deleteTask(widget.taskId);
+    } on FormatException catch (e) {
+      if (mounted) showSnackBar(context, e.message);
+    }
   }
 
   Future<void> toggleCheck() async {
-    await TaskService().toggleCheck(
-      widget.taskId,
-      widget.task.isChecked,
-      context,
-    );
+    try {
+      await TaskService().toggleCheck(
+        widget.taskId,
+        widget.task.isChecked,
+      );
+    } on FormatException catch (e) {
+      if (mounted) showSnackBar(context, e.message);
+    }
   }
 
   (IconData, TextDecoration?) getTaskCheckState() {
@@ -63,7 +71,15 @@ class _TaskTileState extends State<TaskTile> {
   }
 
   Future<void> togglePin(BuildContext pinContext) async {
-    await TaskService().togglePin(widget.taskId, widget.task.isPinned, context);
+    try {
+      var message = await TaskService().togglePin(
+        widget.taskId,
+        widget.task.isPinned,
+      );
+      if (mounted) showSnackBar(context, message);
+    } on FormatException catch (e) {
+      if (mounted) showSnackBar(context, e.message);
+    }
   }
 
   @override
