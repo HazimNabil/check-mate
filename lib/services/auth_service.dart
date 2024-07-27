@@ -35,6 +35,10 @@ class AuthService {
     await auth.signOut();
   }
 
+  String getCurrentUserId() {
+    return auth.currentUser!.uid;
+  }
+
   Stream<User?> getUserState() {
     return auth.authStateChanges();
   }
