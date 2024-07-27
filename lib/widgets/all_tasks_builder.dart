@@ -1,4 +1,4 @@
-import 'package:check_mate/constants.dart';
+import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/loading_indicator.dart';
 import 'package:check_mate/widgets/something_went_wrong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,13 +15,12 @@ class AllTasksBuilder extends StatefulWidget {
 }
 
 class _AllTasksBuilderState extends State<AllTasksBuilder> {
-  dynamic stream;
+  late Stream<QuerySnapshot<Map<String, dynamic>>> stream;
 
   @override
   void initState() {
     super.initState();
-    var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
-    stream = taskCollection.snapshots();
+    stream = TaskService().readTasks();
   }
 
   @override

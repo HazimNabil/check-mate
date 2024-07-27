@@ -1,4 +1,4 @@
-import 'package:check_mate/constants.dart';
+import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/task_list.dart';
 import 'package:check_mate/widgets/loading_indicator.dart';
 import 'package:check_mate/widgets/pinned_tasks_empty.dart';
@@ -14,13 +14,12 @@ class PinnedTasksBuilder extends StatefulWidget {
 }
 
 class _PinnedTasksBuilderState extends State<PinnedTasksBuilder> {
-  dynamic stream;
+  late Stream<QuerySnapshot<Map<String, dynamic>>> stream;
 
   @override
   void initState() {
     super.initState();
-    var taskCollection = FirebaseFirestore.instance.collection(kTaskCollection);
-    stream = taskCollection.where('isPinned', isEqualTo: true).snapshots();
+    stream = TaskService().readTasks(true);
   }
 
   @override

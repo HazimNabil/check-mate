@@ -46,7 +46,11 @@ class TaskService {
     }
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> readTasks() {
-    return taskCollection.snapshots();
+  Stream<QuerySnapshot<Map<String, dynamic>>> readTasks([
+    bool isPinned = false,
+  ]) {
+    return isPinned
+        ? taskCollection.where('isPinned', isEqualTo: isPinned).snapshots()
+        : taskCollection.snapshots();
   }
 }
