@@ -35,6 +35,10 @@ class AuthService {
     await auth.signOut();
   }
 
+  Stream<User?> getUserState() {
+    return auth.authStateChanges();
+  }
+
   FormatException handleAuthException(FirebaseAuthException e) {
     switch (e.code) {
       case 'weak-password':

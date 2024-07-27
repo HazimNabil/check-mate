@@ -1,6 +1,6 @@
+import 'package:check_mate/services/auth_service.dart';
 import 'package:check_mate/views/home_view.dart';
 import 'package:check_mate/views/login_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthView extends StatelessWidget {
@@ -12,7 +12,7 @@ class AuthView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
+        stream: AuthService().getUserState(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return const HomeView();
