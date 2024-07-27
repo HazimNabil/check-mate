@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -27,6 +29,10 @@ class AuthService {
     } catch (e) {
       throw FormatException(e.toString());
     }
+  }
+
+  Future<void> logout() async {
+    await auth.signOut();
   }
 
   FormatException handleAuthException(FirebaseAuthException e) {
