@@ -12,7 +12,7 @@ class PinnedTasksEmpty extends StatelessWidget {
             Image.asset('assets/images/Group 42.png'),
             const SizedBox(height: 89),
             const Text(
-              'Ooops! No pinned list yet...',
+              'Ooops! No pinned task yet...',
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.w600,

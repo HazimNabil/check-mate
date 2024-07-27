@@ -12,7 +12,7 @@ class AllTasksEmpty extends StatelessWidget {
             Image.asset('assets/images/todo svg.png'),
             const SizedBox(height: 89),
             const Text(
-              'Create your first to-do list...',
+              'Create your first to-do task...',
               style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.w600,

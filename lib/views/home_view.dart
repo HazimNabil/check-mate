@@ -77,13 +77,13 @@ class _HomeViewState extends State<HomeView> {
             const LogoDrawerHeader(),
             const SizedBox(height: 60),
             DrawerTile(
-              title: 'All Lists',
+              title: 'All Tasks',
               icon: FontAwesomeIcons.list,
               onTap: () => selectBody(0),
             ),
             const SizedBox(height: 40),
             DrawerTile(
-              title: 'Pinned Lists',
+              title: 'Pinned Tasks',
               icon: FontAwesomeIcons.thumbtack,
               onTap: () => selectBody(1),
             ),
