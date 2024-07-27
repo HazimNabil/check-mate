@@ -1,13 +1,12 @@
 import 'package:check_mate/services/auth_service.dart';
 import 'package:check_mate/views/login_view.dart';
 import 'package:check_mate/widgets/all_tasks_builder.dart';
+import 'package:check_mate/widgets/drawer_items_list.dart';
 import 'package:check_mate/widgets/pinned_tasks_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../constants.dart';
 import '../widgets/add_task_fab.dart';
-import '../widgets/drawer_tile.dart';
 import '../widgets/logo_drawer_header.dart';
 import 'search_view.dart';
 
@@ -76,29 +75,11 @@ class _HomeViewState extends State<HomeView> {
           children: [
             const LogoDrawerHeader(),
             const SizedBox(height: 60),
-            DrawerTile(
-              title: 'All Tasks',
-              icon: FontAwesomeIcons.list,
-              onTap: () => selectBody(0),
-            ),
-            const SizedBox(height: 40),
-            DrawerTile(
-              title: 'Pinned Tasks',
-              icon: FontAwesomeIcons.thumbtack,
-              onTap: () => selectBody(1),
-            ),
-            const SizedBox(height: 40),
-            DrawerTile(
-              title: 'Search',
-              icon: FontAwesomeIcons.magnifyingGlass,
-              onTap: toSearchView,
-            ),
-            const SizedBox(height: 190),
-            DrawerTile(
-              title: 'Logout',
-              icon: FontAwesomeIcons.arrowRightFromBracket,
-              onTap: logout,
-            ),
+            DrawerItemsList(
+              toSearchView: toSearchView,
+              logout: logout,
+              selectBody: selectBody,
+            )
           ],
         ),
       ),
