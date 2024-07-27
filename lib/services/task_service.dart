@@ -1,3 +1,4 @@
+import 'package:check_mate/services/auth_service.dart';
 import 'package:check_mate/typedefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,9 +42,13 @@ class TaskService {
   }
 
   TaskStream readTasks([bool isPinned = false]) {
+    var userId = AuthService().getCurrentUserId();
     return isPinned
-        ? taskCollection.where('isPinned', isEqualTo: isPinned).snapshots()
-        : taskCollection.snapshots();
+        ? taskCollection
+            .where('id', isEqualTo: userId)
+            .where('isPinned', isEqualTo: isPinned)
+            .snapshots()
+        : taskCollection.where('id', isEqualTo: userId).snapshots();
   }
 
   Future<void> toggleCheck(String taskId, bool isChecked) async {
