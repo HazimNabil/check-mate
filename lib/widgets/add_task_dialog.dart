@@ -30,10 +30,8 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
       setState(() => isLoading = true);
       var task = Task(
         title: title!,
-        isChecked: false,
-        isPinned: false,
-        color: getLabelColor(label!),
         label: label!,
+        color: getLabelColor(label!),
       );
       try {
         await TaskService().addTask(task);

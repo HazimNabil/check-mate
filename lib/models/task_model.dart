@@ -7,8 +7,8 @@ class Task {
 
   Task({
     required this.title,
-    required this.isChecked,
-    required this.isPinned,
+    this.isChecked = false,
+    this.isPinned = false,
     required this.color,
     required this.label,
   });
