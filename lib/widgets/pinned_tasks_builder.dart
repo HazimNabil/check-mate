@@ -1,4 +1,5 @@
 import 'package:check_mate/services/task_service.dart';
+import 'package:check_mate/typedefs.dart';
 import 'package:check_mate/widgets/task_list.dart';
 import 'package:check_mate/widgets/loading_indicator.dart';
 import 'package:check_mate/widgets/pinned_tasks_empty.dart';
@@ -14,7 +15,7 @@ class PinnedTasksBuilder extends StatefulWidget {
 }
 
 class _PinnedTasksBuilderState extends State<PinnedTasksBuilder> {
-  late Stream<QuerySnapshot<Map<String, dynamic>>> stream;
+  late TaskStream stream;
 
   @override
   void initState() {

@@ -1,3 +1,4 @@
+import 'package:check_mate/typedefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ import 'task_list.dart';
 
 class SearchBodyBuilder extends StatelessWidget {
   final String searchTerm;
-  final Stream<QuerySnapshot<Map<String, dynamic>>>? stream;
+  final TaskStream? stream;
 
   const SearchBodyBuilder({
     super.key,

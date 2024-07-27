@@ -1,4 +1,5 @@
 import 'package:check_mate/services/task_service.dart';
+import 'package:check_mate/typedefs.dart';
 import 'package:check_mate/widgets/loading_indicator.dart';
 import 'package:check_mate/widgets/something_went_wrong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,7 +16,7 @@ class AllTasksBuilder extends StatefulWidget {
 }
 
 class _AllTasksBuilderState extends State<AllTasksBuilder> {
-  late Stream<QuerySnapshot<Map<String, dynamic>>> stream;
+  late TaskStream stream;
 
   @override
   void initState() {

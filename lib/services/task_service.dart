@@ -1,3 +1,4 @@
+import 'package:check_mate/typedefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -39,9 +40,7 @@ class TaskService {
     }
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> readTasks([
-    bool isPinned = false,
-  ]) {
+  TaskStream readTasks([bool isPinned = false]) {
     return isPinned
         ? taskCollection.where('isPinned', isEqualTo: isPinned).snapshots()
         : taskCollection.snapshots();
