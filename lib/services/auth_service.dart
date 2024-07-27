@@ -16,6 +16,19 @@ class AuthService {
     }
   }
 
+  Future<void> register(String? email, String? password) async {
+    try {
+      await auth.createUserWithEmailAndPassword(
+        email: email!,
+        password: password!,
+      );
+    } on FirebaseAuthException catch (e) {
+      throw handleAuthException(e);
+    } catch (e) {
+      throw FormatException(e.toString());
+    }
+  }
+
   FormatException handleAuthException(FirebaseAuthException e) {
     switch (e.code) {
       case 'weak-password':

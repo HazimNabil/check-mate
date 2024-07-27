@@ -1,6 +1,6 @@
+import 'package:check_mate/services/auth_service.dart';
 import 'package:check_mate/views/home_view.dart';
 import 'package:check_mate/views/login_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -29,37 +29,13 @@ class _RegisterViewState extends State<RegisterView> {
       FocusScope.of(context).requestFocus(FocusNode());
       setState(() => isLoading = true);
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email!,
-          password: password!,
-        );
+        await AuthService().register(email, password);
         if (mounted) {
-          showSnackBar(
-            context,
-            'Registration completed successfully! Welcome aboard!',
-          );
+          showSnackBar(context, 'Welcome aboard!');
           Navigator.pushReplacementNamed(context, HomeView.route);
         }
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          if (mounted) {
-            showSnackBar(
-              context,
-              'The provided password is too weak',
-            );
-          }
-        } else if (e.code == 'email-already-in-use') {
-          if (mounted) {
-            showSnackBar(
-              context,
-              'The provided email is already used',
-            );
-          }
-        }
-      } catch (e) {
-        if (mounted) {
-          showSnackBar(context, e.toString());
-        }
+      } on FormatException catch (e) {
+        if (mounted) showSnackBar(context, e.message);
       }
       setState(() => isLoading = false);
     } else {
