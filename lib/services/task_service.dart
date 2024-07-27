@@ -42,13 +42,12 @@ class TaskService {
   }
 
   TaskStream readTasks([bool isPinned = false]) {
-    var userId = AuthService().getCurrentUserId();
-    return isPinned
-        ? taskCollection
-            .where('id', isEqualTo: userId)
-            .where('isPinned', isEqualTo: isPinned)
-            .snapshots()
-        : taskCollection.where('id', isEqualTo: userId).snapshots();
+    final userId = AuthService().getCurrentUserId();
+    var query = taskCollection.where('id', isEqualTo: userId);
+    if (isPinned) {
+      query = query.where('isPinned', isEqualTo: true);
+    }
+    return query.snapshots();
   }
 
   Future<void> toggleCheck(String taskId, bool isChecked) async {
