@@ -53,4 +53,17 @@ class TaskService {
         ? taskCollection.where('isPinned', isEqualTo: isPinned).snapshots()
         : taskCollection.snapshots();
   }
+
+  Future<void> toggleCheck(
+    String taskId,
+    bool isChecked,
+    BuildContext context,
+  ) async {
+    var value = isChecked ? false : true;
+    try {
+      await taskCollection.doc(taskId).update({'isChecked': value});
+    } catch (e) {
+      if (context.mounted) showSnackBar(context, e.toString());
+    }
+  }
 }

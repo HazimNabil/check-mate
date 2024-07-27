@@ -27,15 +27,8 @@ class _TaskTileState extends State<TaskTile> {
     await TaskService().deleteTask(widget.taskId, context);
   }
 
-  void toggleCheck() async {
-    var isChecked = widget.task.isChecked ? false : true;
-    try {
-      await taskCollection.doc(widget.taskId).update({'isChecked': isChecked});
-    } catch (e) {
-      if (mounted) {
-        showSnackBar(context, e.toString());
-      }
-    }
+  Future<void> toggleCheck() async {
+    TaskService().toggleCheck(widget.taskId, widget.task.isChecked, context);
   }
 
   (IconData, TextDecoration?) getTaskCheckState() {
