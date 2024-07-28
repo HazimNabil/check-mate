@@ -5,11 +5,13 @@ import '../constants.dart';
 class ActionButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final Color textColor;
 
   const ActionButton({
     super.key,
     required this.text,
     required this.onPressed,
+    this.textColor = kPrimaryColor,
   });
 
   @override
@@ -21,7 +23,7 @@ class ActionButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(color: kPrimaryColor),
+        style: TextStyle(color: textColor),
       ),
     );
   }

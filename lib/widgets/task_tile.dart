@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../models/task_model.dart';
+import 'delete_task_dialog.dart';
 import 'edit_task_dialog.dart';
 
 class TaskTile extends StatefulWidget {
@@ -20,20 +21,24 @@ class TaskTile extends StatefulWidget {
 }
 
 class _TaskTileState extends State<TaskTile> {
-  Future<void> delete(BuildContext deleteContext) async {
-    try {
-      await TaskService().deleteTask(widget.taskId);
-    } on FormatException catch (e) {
-      if (mounted) showSnackBar(context, e.message);
-    }
-  }
-
   Future<void> toggleCheck() async {
     try {
       await TaskService().toggleCheck(
         widget.taskId,
         widget.task.isChecked,
       );
+    } on FormatException catch (e) {
+      if (mounted) showSnackBar(context, e.message);
+    }
+  }
+
+  Future<void> togglePin(BuildContext pinContext) async {
+    try {
+      var message = await TaskService().togglePin(
+        widget.taskId,
+        widget.task.isPinned,
+      );
+      if (mounted) showSnackBar(context, message);
     } on FormatException catch (e) {
       if (mounted) showSnackBar(context, e.message);
     }
@@ -56,7 +61,7 @@ class _TaskTileState extends State<TaskTile> {
     return widget.task.isPinned ? Icons.push_pin_outlined : Icons.push_pin;
   }
 
-  void showEditDialog(context) {
+  void showEditDialog(BuildContext context) {
     showTaskDialog(
       context,
       EditTaskDialog(
@@ -67,16 +72,13 @@ class _TaskTileState extends State<TaskTile> {
     );
   }
 
-  Future<void> togglePin(BuildContext pinContext) async {
-    try {
-      var message = await TaskService().togglePin(
-        widget.taskId,
-        widget.task.isPinned,
-      );
-      if (mounted) showSnackBar(context, message);
-    } on FormatException catch (e) {
-      if (mounted) showSnackBar(context, e.message);
-    }
+  void showDeleteDialog(BuildContext context) {
+    showTaskDialog(
+      context,
+      DeleteTaskDialog(
+        taskId: widget.taskId,
+      ),
+    );
   }
 
   @override
@@ -112,7 +114,7 @@ class _TaskTileState extends State<TaskTile> {
               foregroundColor: kBackgroundColor,
             ),
             SlidableAction(
-              onPressed: delete,
+              onPressed: showDeleteDialog,
               icon: Icons.delete,
               backgroundColor: Colors.red,
               foregroundColor: kBackgroundColor,
