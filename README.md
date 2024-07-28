@@ -1,16 +1,19 @@
-# check_mate
+## Check mate: Your Personal Productivity Assistant
 
-A new Flutter project.
+### Overview
+Check mate is a to-do list app built with Flutter and Firebase, designed to help you stay organized and focused.
 
-## Getting Started
+### Features
+* **User Management:** Secure login, registration, and logout.
+* **Task Management:** Create, edit, delete, and complete tasks.
+* **Task Organization:** Label tasks for better management (work, finance, personal, other).
+* **Task Prioritization:** Pin important tasks for quick access.
+* **Search Functionality:** Easily find tasks based on keywords.
+* **Data Synchronization:** Store and sync your tasks across devices using Firebase.
 
-This project is a starting point for a Flutter application.
+### Technology Stack
+* **Flutter:** Cross-platform UI framework for building native-like apps.
+* **Firebase:** Backend platform for authentication, database, and cloud functions.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Attribution:**
+* This project was inspired by design principles from the To-do List Mobile App created by Maietry Prajapati (https://www.figma.com/community/file/1210926420668343883/to-do-list-mobile-app), licensed under CC BY 4.0(see license: https://creativecommons.org/licenses/by/4.0/). Check mate's design is a unique adaptation of these principles. 
