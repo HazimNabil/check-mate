@@ -2,7 +2,7 @@ import 'package:check_mate/constants.dart';
 import 'package:check_mate/helper/show_dialog.dart';
 import 'package:check_mate/helper/show_snack_bar.dart';
 import 'package:check_mate/services/task_service.dart';
-import 'package:check_mate/widgets/label_item.dart';
+import 'package:check_mate/widgets/task_content_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -125,39 +125,11 @@ class _TaskTileState extends State<TaskTile> {
             ),
           ],
         ),
-        child: ListTile(
-          tileColor: Color(widget.task.color),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 2),
-          horizontalTitleGap: 0,
-          leading: IconButton(
-            icon: Icon(
-              checkIcon,
-              size: 21,
-              color: kPrimaryColor,
-            ),
-            onPressed: toggleCheck,
-          ),
-          title: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Text(
-              widget.task.title,
-              style: TextStyle(
-                color: kPrimaryColor,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                decoration: decoration,
-                decorationThickness: 2,
-                decorationColor: kPrimaryColor,
-              ),
-            ),
-          ),
-          trailing: LabelItem(
-            label: widget.task.label,
-            color: kPrimaryColor,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+        child: TaskContentTile(
+          task: widget.task,
+          checkIcon: checkIcon,
+          decoration: decoration,
+          toggleCheck: toggleCheck,
         ),
       ),
     );
