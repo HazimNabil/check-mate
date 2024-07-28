@@ -18,6 +18,7 @@ class TaskService {
         'isPinned': false,
         'label': task.label,
         'color': getLabelColor(task.label),
+        'date': DateTime.now(),
       });
     } catch (e) {
       throw FormatException(e.toString());
@@ -42,10 +43,14 @@ class TaskService {
 
   TaskStream readTasks([bool isPinned = false]) {
     final userId = AuthService().getCurrentUserId();
-    var query = taskCollection.where('userId', isEqualTo: userId);
+    var query = taskCollection
+        .orderBy('date', descending: true)
+        .where('userId', isEqualTo: userId);
+
     if (isPinned) {
       query = query.where('isPinned', isEqualTo: true);
     }
+
     return query.snapshots();
   }
 
