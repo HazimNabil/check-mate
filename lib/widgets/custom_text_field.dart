@@ -7,7 +7,9 @@ class CustomTextField extends StatelessWidget {
   final void Function(String) onChanged;
   final String? Function(String?)? validator;
   final bool obscureText;
-  final Icon? icon;
+  final Icon? prefix;
+  final IconButton? suffix;
+  final TextEditingController? controller;
 
   const CustomTextField({
     super.key,
@@ -15,7 +17,9 @@ class CustomTextField extends StatelessWidget {
     required this.onChanged,
     this.validator,
     this.obscureText = false,
-    this.icon,
+    this.prefix,
+    this.suffix,
+    this.controller,
   });
 
   @override
@@ -23,12 +27,14 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: TextFormField(
+        controller: controller,
         obscureText: obscureText,
         validator: validator,
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
-          prefixIcon: icon,
+          prefixIcon: prefix,
+          suffixIcon: suffix,
           filled: true,
           fillColor: const Color(0xFFE3E2E2),
           hintText: hint,

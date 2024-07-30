@@ -1,4 +1,4 @@
-import 'package:check_mate/constants.dart';
+import 'package:check_mate/services/task_service.dart';
 import 'package:check_mate/widgets/custom_text_field.dart';
 import 'package:check_mate/widgets/search_body_builder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,6 +19,7 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
   Stream<QuerySnapshot<Map<String, dynamic>>>? stream;
   String searchTerm = '';
+  final controller = TextEditingController();
 
   AppBar buildAppBar() {
     return AppBar(
@@ -29,10 +30,15 @@ class _SearchViewState extends State<SearchView> {
       title: CustomTextField(
         hint: 'Search your list',
         onChanged: onChanged,
-        icon: const Icon(
+        prefix: const Icon(
           FontAwesomeIcons.magnifyingGlass,
           size: 18,
         ),
+        suffix: IconButton(
+          onPressed: clear,
+          icon: const Icon(Icons.clear, size: 20),
+        ),
+        controller: controller,
       ),
       actions: const [
         CancelButton(),
@@ -40,12 +46,15 @@ class _SearchViewState extends State<SearchView> {
     );
   }
 
+  void clear() {
+    controller.clear();
+    setState(() => searchTerm = '');
+  }
+
   void onChanged(value) {
     setState(() {
       searchTerm = value.toLowerCase();
-      var taskCollection =
-          FirebaseFirestore.instance.collection(kTaskCollection);
-      stream = taskCollection.snapshots();
+      stream = TaskService().readTasks();
     });
   }
 
