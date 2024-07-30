@@ -2,6 +2,7 @@ import 'package:check_mate/constants.dart';
 import 'package:check_mate/services/auth_service.dart';
 import 'package:check_mate/views/home_view.dart';
 import 'package:check_mate/views/register_view.dart';
+import 'package:check_mate/widgets/auth_switch_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -84,29 +85,11 @@ class _LoginViewState extends State<LoginView> {
                 onPressed: login,
               ),
               const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don't have account? ",
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, RegisterView.route);
-                    },
-                    child: const Text(
-                      'Register here',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              )
+              AuthSwitchPrompt(
+                promptText: "Don't have account? ",
+                actionText: 'Register here',
+                onTap: () => Navigator.pushNamed(context, RegisterView.route),
+              ),
             ],
           ),
         ),

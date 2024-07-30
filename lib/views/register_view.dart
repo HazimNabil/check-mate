@@ -1,6 +1,6 @@
 import 'package:check_mate/services/auth_service.dart';
 import 'package:check_mate/views/home_view.dart';
-import 'package:check_mate/views/login_view.dart';
+import 'package:check_mate/widgets/auth_switch_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -100,29 +100,11 @@ class _RegisterViewState extends State<RegisterView> {
                 onPressed: register,
               ),
               const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don't have account? ",
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, LoginView.route);
-                    },
-                    child: const Text(
-                      'Login here',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              )
+              AuthSwitchPrompt(
+                promptText: 'You already have account? ',
+                actionText: 'Login here',
+                onTap: () => Navigator.pop(context),
+              ),
             ],
           ),
         ),
