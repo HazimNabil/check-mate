@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../constants.dart';
+import '../helper/auth_validation.dart';
 import '../helper/show_snack_bar.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/custom_text_field.dart';
@@ -43,6 +44,15 @@ class _RegisterViewState extends State<RegisterView> {
     }
   }
 
+  String? validateConfirmedPassword(String? value) {
+    if (value?.isEmpty ?? true) {
+      return 'This field is required';
+    } else if (confirmedPassword != password) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -67,49 +77,21 @@ class _RegisterViewState extends State<RegisterView> {
               const SizedBox(height: 130),
               CustomTextField(
                 hint: 'Email',
-                onChanged: (value) {
-                  email = value;
-                },
-                validator: (value) {
-                  final emailPattern = RegExp(
-                    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-                  );
-                  if (value?.isEmpty ?? true) {
-                    return 'This field is required';
-                  } else if (!emailPattern.hasMatch(value!)) {
-                    return 'This is not valid email';
-                  }
-                  return null;
-                },
+                onChanged: (value) => email = value,
+                validator: validateEmail,
               ),
               const SizedBox(height: 20),
               CustomTextField(
                 hint: 'Password',
-                onChanged: (value) {
-                  password = value;
-                },
-                validator: (value) {
-                  if (value?.isEmpty ?? true) {
-                    return 'This field is required';
-                  }
-                  return null;
-                },
+                onChanged: (value) => password = value,
+                validator: validatePassword,
                 obscureText: true,
               ),
               const SizedBox(height: 20),
               CustomTextField(
                 hint: 'Confirm Password',
-                onChanged: (value) {
-                  confirmedPassword = value;
-                },
-                validator: (value) {
-                  if (value?.isEmpty ?? true) {
-                    return 'This field is required';
-                  } else if (confirmedPassword != password) {
-                    return 'Passwords do not match';
-                  }
-                  return null;
-                },
+                onChanged: (value) => confirmedPassword = value,
+                validator: validateConfirmedPassword,
                 obscureText: true,
               ),
               const SizedBox(height: 50),

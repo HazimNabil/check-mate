@@ -5,6 +5,7 @@ import 'package:check_mate/views/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../helper/auth_validation.dart';
 import '../helper/show_snack_bar.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/custom_text_field.dart';
@@ -41,25 +42,6 @@ class _LoginViewState extends State<LoginView> {
     } else {
       setState(() => autovalidateMode = AutovalidateMode.always);
     }
-  }
-
-  String? validatePassword(value) {
-    if (value?.isEmpty ?? true) {
-      return 'This field is required';
-    }
-    return null;
-  }
-
-  String? validateEmail(value) {
-    final emailPattern = RegExp(
-      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-    );
-    if (value?.isEmpty ?? true) {
-      return 'This field is required';
-    } else if (!emailPattern.hasMatch(value!)) {
-      return 'This is not valid email';
-    }
-    return null;
   }
 
   @override
