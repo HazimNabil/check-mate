@@ -43,6 +43,25 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
+  String? validatePassword(value) {
+    if (value?.isEmpty ?? true) {
+      return 'This field is required';
+    }
+    return null;
+  }
+
+  String? validateEmail(value) {
+    final emailPattern = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    if (value?.isEmpty ?? true) {
+      return 'This field is required';
+    } else if (!emailPattern.hasMatch(value!)) {
+      return 'This is not valid email';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -67,33 +86,14 @@ class _LoginViewState extends State<LoginView> {
               const SizedBox(height: 130),
               CustomTextField(
                 hint: 'Email',
-                onChanged: (value) {
-                  email = value;
-                },
-                validator: (value) {
-                  final emailPattern = RegExp(
-                    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-                  );
-                  if (value?.isEmpty ?? true) {
-                    return 'This field is required';
-                  } else if (!emailPattern.hasMatch(value!)) {
-                    return 'This is not valid email';
-                  }
-                  return null;
-                },
+                onChanged: (value) => email = value,
+                validator: validateEmail,
               ),
               const SizedBox(height: 20),
               CustomTextField(
                 hint: 'Password',
-                onChanged: (value) {
-                  password = value;
-                },
-                validator: (value) {
-                  if (value?.isEmpty ?? true) {
-                    return 'This field is required';
-                  }
-                  return null;
-                },
+                onChanged: (value) => password = value,
+                validator: validatePassword,
                 obscureText: true,
               ),
               const SizedBox(height: 50),
