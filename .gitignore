@@ -44,3 +44,6 @@ app.*.map.json
 
 # vscode settings
 settings.json
+
+# Firebase options
+lib/firebase_options.dart
